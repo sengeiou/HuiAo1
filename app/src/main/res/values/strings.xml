@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">达到</string>
+
+    <string name="rv_loading">正在加载...</string>
+    <string name="rv_loading_complete">已加载全部内容</string>
+
+    <string name="shouji">请输入您的手机号</string>
+    <string name="mima">请输入密码</string>
+    <string name="yanzhengma">请输入验证码</string>
+    <string name="yanzheng">验证</string>
+    <string name="mima_new">请输入新的密码</string>
+    <string name="mima_queren">请确认密码</string>
+    <string name="next">下一步</string>
+    <string name="wancheng">完成</string>
+    <string name="quxiao">取消</string>
+    <string name="xingqu">你对以下感兴趣的是？</string>
+    <string name="queding">确定</string>
+    <string name="wangjimima">忘记密码</string>
+    <string name="xinrenzhuce">新人注册</string>
+    <string name="denglu">登陆</string>
+    <string name="sanfangdenglu">第三方登陆</string>
+    <string name="nideshengrishi">你的生日是？</string>
+    <string name="shengrijianjie">为了给你带来更有趣回忆，不要选错哦~</string>
+    <string name="xingbie">你的性别是？</string>
+    <string name="nan">男</string>
+    <string name="nv">女</string>
+    <string name="shenfen">你的身份是？</string>
+
+
+</resources>
