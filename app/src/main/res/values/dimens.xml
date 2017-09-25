@@ -8,6 +8,12 @@
     <dimen name="T2">17sp</dimen>
     <dimen name="T3">14sp</dimen>
     <dimen name="T4">12sp</dimen>
+    <dimen name="T5">15sp</dimen>
+    <dimen name="T6">30sp</dimen>
+    <dimen name="T7">10sp</dimen>
+    <dimen name="T8">13sp</dimen>
+    <dimen name="T9">20sp</dimen>
+    <dimen name="T10">16sp</dimen>
 
     <!--边距大小-->
     <dimen name="M1">1dp</dimen>

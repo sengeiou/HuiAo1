@@ -10,10 +10,14 @@
     <color name="A">#cccccc</color>
     <color name="B">#666666</color>
     <color name="C">#ffffff</color>
-    <color name="D">#131313</color>
+    <color name="D">#1a1a1a</color>
     <color name="E">#d9d9d9</color>
     <color name="F">#6487c2</color>
     <color name="G">#999999</color>
+    <color name="H">#587cb7</color>
+    <color name="I">#a6bbe0</color>
+    <color name="J">#042357</color>
+    <color name="K">#f05571</color>
 
 
     <!--分割线颜色-->

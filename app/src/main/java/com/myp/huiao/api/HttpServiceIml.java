@@ -1,6 +1,9 @@
 package com.myp.huiao.api;
 
+import com.myp.huiao.entity.BannerBO;
 import com.myp.huiao.entity.ChioceBO;
+import com.myp.huiao.entity.CourserBO;
+import com.myp.huiao.entity.CourserClassifyBO;
 import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.util.rx.RxResultHelper;
 
@@ -17,6 +20,7 @@ import rx.Observable;
 public class HttpServiceIml {
 
     private static HttpService service;
+    private static final String apiSize = "10";   //分页查询的所有接口默认每页20条
 
     /**
      * 获取代理对象
@@ -34,6 +38,22 @@ public class HttpServiceIml {
     public static Observable<Object> phoneVerification(String phone, String versionType) {
         return getService().phoneVerification(phone, versionType).compose(RxResultHelper.httpRusult());
     }
+
+    /**
+     * 验证身份
+     */
+    public static Observable<UserBO> userAuthentication(String account, String phone, String version) {
+        return getService().userAuthentication(account, phone, version).compose(RxResultHelper.<UserBO>httpRusult());
+    }
+
+
+    /**
+     * 修改密码
+     */
+    public static Observable<UserBO> userPassWord(String password, String pwd) {
+        return getService().userPassWord(password, pwd).compose(RxResultHelper.<UserBO>httpRusult());
+    }
+
 
     /**
      * 用户注册
@@ -70,5 +90,44 @@ public class HttpServiceIml {
     public static Observable<UserBO> userInterest(String gender, String educationId, String birthday, String interestIds) {
         return getService().userInterest(gender, educationId, birthday, interestIds).compose(RxResultHelper.<UserBO>httpRusult());
     }
+
+    /**
+     * 用于实现获取首页专栏、热门课程。
+     */
+    public static Observable<List<CourserBO>> hotCourse(String courseType) {
+        return getService().hotCource(courseType).compose(RxResultHelper.<List<CourserBO>>httpRusult());
+    }
+
+    /**
+     * 获取轮播图
+     */
+    public static Observable<List<BannerBO>> bannersList(String source) {
+        return getService().bannersList(source).compose(RxResultHelper.<List<BannerBO>>httpRusult());
+    }
+
+    /**
+     * 获取课程分类
+     */
+    public static Observable<List<CourserClassifyBO>> cousersClassify(String classify) {
+        return getService().courserClassify(classify).compose(RxResultHelper.<List<CourserClassifyBO>>httpRusult());
+    }
+
+    /**
+     * 获取课程列表
+     */
+    public static Observable<List<CourserBO>> courserList(String price, String buyCount, String time,
+                                                          String facilityValue, String courseTypeId,
+                                                          String courseName, String apiPage) {
+        return getService().courserList(price, buyCount, time, facilityValue, courseTypeId,
+                courseName, apiPage, apiSize).compose(RxResultHelper.<List<CourserBO>>httpRusult());
+    }
+
+    /**
+     * 获取课程详情
+     */
+    public static Observable<CourserBO> courserMessage(String courseId) {
+        return getService().courserMessage(courseId).compose(RxResultHelper.<CourserBO>httpRusult());
+    }
+
 
 }

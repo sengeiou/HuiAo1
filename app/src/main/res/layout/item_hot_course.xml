@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="134dp"
+    android:layout_marginLeft="25dp"
+    android:layout_marginRight="25dp"
+    android:orientation="horizontal">
+
+    <cn.gavinliu.android.lib.shapedimageview.ShapedImageView
+        android:id="@+id/class_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/zhanwei2"
+        app:round_radius="6dp"
+        app:shape_mode="round_rect" />
+
+
+</LinearLayout>

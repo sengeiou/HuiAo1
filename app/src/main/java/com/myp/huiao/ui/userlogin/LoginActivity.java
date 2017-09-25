@@ -13,6 +13,7 @@ import com.myp.huiao.base.MyApplication;
 import com.myp.huiao.config.ConditionEnum;
 import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.mvp.MVPBaseActivity;
+import com.myp.huiao.ui.main.MainActivity;
 import com.myp.huiao.ui.userforword.ForwordPassActivity;
 import com.myp.huiao.ui.userregister.RegisterActivity;
 import com.myp.huiao.util.LogUtils;
@@ -127,5 +128,6 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         MyApplication.isLogin = ConditionEnum.LOGIN;
         MyApplication.user = data;
         MyApplication.spUtils.put("uuid", data.getUuid());
+        gotoActivity(MainActivity.class, true);
     }
 }

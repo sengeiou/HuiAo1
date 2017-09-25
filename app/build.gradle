@@ -22,6 +22,17 @@ android {
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
+
+    //签名
+    signingConfigs {
+        release {// 自己的签名文件
+            storeFile file("E:/达到密匙/wuliang.jks")
+            storePassword "123456"
+            keyAlias "wuliang"
+            keyPassword "123456"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -30,7 +41,11 @@ android {
         repositories {
             jcenter()
         }
+        debug {
+            signingConfig signingConfigs.release
+        }
     }
+
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
     }
@@ -40,10 +55,16 @@ android {
         exclude 'META-INF/io.netty.versions.properties'
         exclude 'META-INF/CompilerHints'
     }
+
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
         }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
@@ -56,7 +77,7 @@ allprojects {
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -81,18 +102,34 @@ dependencies {
     compile 'cat.ereza:customactivityoncrash:1.5.0'
     compile 'com.github.paolorotolo:appintro:4.1.0'
     compile 'com.aurelhubert:ahbottomnavigation:1.5.1'
-    compile 'de.hdodenhof:circleimageview:2.1.0'//圆形图片
+    compile 'cn.gavinliu.android.lib:ShapedImageView:0.4'
+    //圆形图片
     compile files('libs/multiwindow-v1.3.2.jar')
     compile files('libs/sdk-v1.0.0.jar')
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
-    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'  //用于cookie持久化操作
+    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
+    //用于cookie持久化操作
     compile 'io.reactivex:rxnetty:0.5.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.0.2'
-    compile 'cn.jiguang.sdk:jpush:3.0.1'  // 此处以JPush 3.0.1 版本为例。
-    compile 'cn.jiguang.sdk:jcore:1.1.0'  // 此处以JCore 1.1.0 版本为例。
+    compile 'cn.jiguang.sdk:jpush:3.0.8'
+    // 此处以JPush 3.0.1 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.6'
+    // 此处以JCore 1.1.0 版本为例。
     compile 'com.baoyz.actionsheet:library:1.1.5'
     compile 'com.gyf.barlibrary:barlibrary:2.2.9'
-    compile 'com.contrarywind:Android-PickerView:3.2.6'  //3D效果的时间选择器
+    compile 'com.contrarywind:Android-PickerView:3.2.6'
+    //3D效果的时间选择器
+    compile 'com.bigkoo:svprogresshud:1.0.6'
+    //进度弹窗
+    compile 'com.xyz.tabitem:tabitem:1.0.2'
+    //首页底部选项条控件
+    compile 'com.github.donkingliang:CustomBanner:1.1.0'
+    //轮播图控件
+    compile 'com.zhy:magic-viewpager:1.0.1'
+    //滑动的viewpager带各种动画
+    compile 'com.hedgehog.ratingbar:app:1.1.2'
+    //完整版引入
+    compile 'com.shuyu:GSYVideoPlayer:2.0.8'
 }
 

@@ -65,10 +65,11 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
         passwordStr = editPassword.getText().toString().trim();
         switch (v.getId()) {
             case R.id.next_button:    //下一步
-//                if (isRegister()) {
-//                    mPresenter.registerUser(phoneStr, MD5.strToMd5Low32(passwordStr), yanzhengmaStr);
-//                }
-                gotoActivity(UpdateSexActivity.class, true);
+                if (isRegister()) {
+                    showProgress("加载中...");
+                    mPresenter.registerUser(phoneStr, MD5.strToMd5Low32(passwordStr), yanzhengmaStr);
+                }
+//                gotoActivity(UpdateSexActivity.class, true);
                 break;
             case R.id.yanzheng_button:   //获取验证码
                 if (StringUtils.isEmpty(phoneStr)) {
@@ -80,6 +81,7 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
                     return;
                 }
                 mPresenter.getVersion(phoneStr, "register");
+                showProgress("加载中...");
                 break;
         }
     }
@@ -129,13 +131,13 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
 
     @Override
     public void onRequestError(String msg) {
+        stopProgress();
         LogUtils.showToast(msg);
     }
 
     @Override
     public void onRequestEnd() {
-        yanzhengButton.setEnabled(false);
-        timer.start();
+        stopProgress();
     }
 
     @Override
@@ -147,5 +149,12 @@ public class RegisterActivity extends MVPBaseActivity<RegisterContract.View, Reg
     @Override
     public void getData() {
         gotoActivity(UpdateSexActivity.class, true);
+    }
+
+    @Override
+    public void getVersionSuress() {
+        stopProgress();
+        yanzhengButton.setEnabled(false);
+        timer.start();
     }
 }

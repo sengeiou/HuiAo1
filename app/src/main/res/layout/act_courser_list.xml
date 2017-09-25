@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_layout01" />
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_scrollFlags="scroll">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="14dp"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp">
+
+
+                    <TextView
+                        android:id="@+id/edit_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/edit_bg" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="11dp"
+                            android:background="@drawable/sousuo" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="9dp"
+                            android:text="@string/sousuo"
+                            android:textColor="@color/G"
+                            android:textSize="@dimen/T8" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/yinying"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/line_bg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/remen_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/remen"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="@string/remen"
+                                android:textColor="@color/D"
+                                android:textSize="@dimen/T2"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/remen_bord"
+                                android:layout_width="3dp"
+                                android:layout_height="3dp"
+                                android:layout_below="@+id/remen"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/circle_black" />
+
+                        </RelativeLayout>
+
+
+                        <ImageView
+                            android:id="@+id/remen_img"
+                            android:layout_width="6dp"
+                            android:layout_height="12dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/paixu_xia" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="20dp"
+                        android:background="#e5e5e5" />
+
+
+                    <LinearLayout
+                        android:id="@+id/nandu_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/nandu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="@string/nandu"
+                                android:textColor="@color/G"
+                                android:textSize="@dimen/T2" />
+
+                            <View
+                                android:id="@+id/nandu_bord"
+                                android:layout_width="3dp"
+                                android:layout_height="3dp"
+                                android:layout_below="@+id/nandu"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/circle_black"
+                                android:visibility="gone" />
+
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:id="@+id/nandu_img"
+                            android:layout_width="6dp"
+                            android:layout_height="12dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/paixu_none" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="20dp"
+                        android:background="#e5e5e5" />
+
+
+                    <LinearLayout
+                        android:id="@+id/jiage_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/jiage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="@string/jiage"
+                                android:textColor="@color/G"
+                                android:textSize="@dimen/T2" />
+
+
+                            <View
+                                android:id="@+id/jiage_bord"
+                                android:layout_width="3dp"
+                                android:layout_height="3dp"
+                                android:layout_below="@+id/jiage"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/circle_black"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:id="@+id/jiage_img"
+                            android:layout_width="6dp"
+                            android:layout_height="12dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/paixu_none" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scoll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+
+
+</LinearLayout>

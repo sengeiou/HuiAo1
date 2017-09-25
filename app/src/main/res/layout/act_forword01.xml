@@ -21,7 +21,49 @@
             android:layout_width="match_parent"
             android:layout_height="39dp"
             android:layout_marginLeft="34dp"
-            android:layout_marginRight="34dp">
+            android:layout_marginRight="34dp"
+            android:layout_marginTop="9dp">
+
+            <ImageView
+                android:id="@+id/accent"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/M10"
+                android:background="@drawable/zhanghao" />
+
+
+            <EditText
+                android:id="@+id/edit_accent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/M10"
+                android:layout_toEndOf="@+id/accent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/zhanghao"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="@color/B"
+                android:textColorHint="@color/A"
+                android:textSize="@dimen/T3" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/line_bg" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:layout_marginLeft="34dp"
+            android:layout_marginRight="34dp"
+            android:layout_marginTop="9dp">
 
             <ImageView
                 android:id="@+id/shouji"

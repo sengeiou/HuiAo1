@@ -19,6 +19,9 @@ public class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> 
         HttpServiceIml.phoneVerification(phone, versionType).subscribe(new Subscriber<Object>() {
             @Override
             public void onCompleted() {
+                if (mView != null) {
+                    mView.onRequestEnd();
+                }
             }
 
             @Override
@@ -31,7 +34,7 @@ public class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> 
             @Override
             public void onNext(Object s) {
                 if (mView != null) {
-                    mView.onRequestEnd();
+                    mView.getVersionSuress();
                 }
             }
         });

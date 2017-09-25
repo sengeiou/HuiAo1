@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/kechengpaihang"
+        android:textColor="@color/D"
+        android:textSize="@dimen/T1"
+        android:textStyle="bold" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="134dp"
+        android:layout_marginTop="20dp"
+        android:clipChildren="false">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/id_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:clipChildren="false"
+            android:overScrollMode="never" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/title_lizi"
+        android:textColor="@color/D"
+        android:textSize="@dimen/T2"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/all_courser"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginRight="37dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/anniu1"
+        android:gravity="center"
+        android:text="@string/all_class"
+        android:textColor="@color/C"
+        android:textSize="@dimen/T1" />
+
+
+</LinearLayout>

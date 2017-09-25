@@ -8,21 +8,19 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.myp.huiao.R;
-import com.myp.huiao.base.MyApplication;
 import com.myp.huiao.entity.ChioceBO;
-import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.mvp.MVPBaseActivity;
 import com.myp.huiao.ui.userupdate.UpdateBartherDayActivity;
 import com.myp.huiao.util.LogUtils;
 import com.myp.huiao.widget.superadapter.CommonAdapter;
 import com.myp.huiao.widget.superadapter.ViewHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.Bind;
-import de.hdodenhof.circleimageview.CircleImageView;
+import cn.gavinliu.android.lib.shapedimageview.ShapedImageView;
 
 
 /**
@@ -84,8 +82,8 @@ public class UpdateShenfenActivity extends MVPBaseActivity<UpdateShenfenContract
         adapter = new CommonAdapter<ChioceBO>(this, R.layout.item_user_update, chioceBOs) {
             @Override
             protected void convert(ViewHolder viewHolder, ChioceBO item, int position) {
-                CircleImageView imageView = viewHolder.getView(R.id.image);
-                Glide.with(UpdateShenfenActivity.this).load(item.getImageUrl()).into(imageView);
+                ShapedImageView imageView = viewHolder.getView(R.id.image);
+                Picasso.with(UpdateShenfenActivity.this).load(item.getImageUrl()).into(imageView);
                 viewHolder.setText(R.id.text, item.getName());
                 if (checked == position) {
                     viewHolder.getView(R.id.check_brold).setVisibility(View.VISIBLE);

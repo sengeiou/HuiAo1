@@ -8,14 +8,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.myp.huiao.R;
 import com.myp.huiao.entity.ChioceBO;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.gavinliu.android.lib.shapedimageview.ShapedImageView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -72,7 +73,7 @@ class InterestAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_user_update, null);
             holder = new Holder();
-            holder.image = (CircleImageView) convertView.findViewById(R.id.image);
+            holder.image = (ShapedImageView) convertView.findViewById(R.id.image);
             holder.checkBorld = (ImageView) convertView.findViewById(R.id.check_brold);
             holder.name = (TextView) convertView.findViewById(R.id.text);
             convertView.setTag(holder);
@@ -85,13 +86,13 @@ class InterestAdapter extends BaseAdapter {
         } else {
             holder.checkBorld.setVisibility(View.GONE);
         }
-        Glide.with(mContext).load(chioceBO.getImageUrl()).into(holder.image);
+        Picasso.with(mContext).load(chioceBO.getImageUrl()).into(holder.image);
         holder.name.setText(chioceBO.getName());
         return convertView;
     }
 
     private class Holder {
-        CircleImageView image;
+        ShapedImageView image;
         ImageView checkBorld;
         TextView name;
     }

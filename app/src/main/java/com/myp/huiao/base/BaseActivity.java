@@ -1,18 +1,25 @@
 package com.myp.huiao.base;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.gyf.barlibrary.ImmersionBar;
 import com.myp.huiao.R;
 import com.myp.huiao.util.AppManager;
-import com.myp.huiao.util.BarUtils;
 import com.myp.huiao.util.LogUtils;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -25,6 +32,10 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends RxAppCompatActivity {
+
+
+    private SVProgressHUD svProgressHUD;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +44,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         ImmersionBar.with(this).statusBarDarkFont(true).init();   //解决虚拟按键与状态栏沉浸冲突
         LogUtils.init(this);
         ButterKnife.bind(this);
+        svProgressHUD = new SVProgressHUD(this);
         AppManager.getAppManager().addActivity(this);
     }
 
@@ -88,6 +100,102 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         text.setText(title);
     }
 
+
+    /**
+     * 设置标题栏右边图标及点击事件
+     */
+    protected void setRightButton(int drawable, View.OnClickListener listener) {
+        LinearLayout rightLayout = (LinearLayout) findViewById(R.id.right_img_layout);
+        ImageView rightImg = (ImageView) findViewById(R.id.right_img);
+        rightLayout.setVisibility(View.VISIBLE);
+        rightImg.setImageResource(drawable);
+        rightLayout.setOnClickListener(listener);
+    }
+
+
+    /**
+     * 显示加载进度弹窗,点击屏幕消失
+     */
+    protected void showProgress(String msg) {
+        svProgressHUD.showWithStatus(msg, SVProgressHUD.SVProgressHUDMaskType.BlackCancel);
+    }
+
+    /**
+     * 显示加载进度弹窗,点击屏幕不可消失
+     */
+    protected void showNoProgress(String msg) {
+        svProgressHUD.showWithStatus(msg, SVProgressHUD.SVProgressHUDMaskType.Black);
+    }
+
+    /**
+     * 停止弹窗
+     */
+    protected void stopProgress() {
+        if (svProgressHUD.isShowing()) {
+            svProgressHUD.dismiss();
+        }
+    }
+
+    /**
+     * 初始化下拉刷新控件
+     */
+    protected void invitionSwipeRefresh(SwipeRefreshLayout mSwipeLayout) {
+        // 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mSwipeLayout.setDistanceToTriggerSync(300);// 设置手指在屏幕下拉多少距离会触发下拉刷新
+        mSwipeLayout.setProgressBackgroundColor(R.color.white); // 设定下拉圆圈的背景
+        mSwipeLayout.setSize(SwipeRefreshLayout.DEFAULT); // 设置圆圈的大小
+    }
+
+
+    /**
+     * 分配触摸事件
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {// 判断动作，如点击，按下等
+            View v = getCurrentFocus();// 得到获取焦点的view
+            if (isShouldHideInput(v, ev)) {// 点击的位子
+                hideSoftInput(v.getWindowToken());
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    /**
+     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时没必要隐藏
+     */
+    private boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {// 判断view是否为空，
+            // view是否为EditText
+            int[] l = {0, 0};
+            v.getLocationInWindow(l);// 获取view的焦点坐标
+            int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left
+                    + v.getWidth();// 计算坐标
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {// 比较坐标
+                // 点击EditText的事件，忽略它。
+                return false;
+            } else {
+                return true;
+            }
+        }
+        // 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditView上，和用户用轨迹球选择其他的焦点
+        return false;
+    }
+
+
+    /**
+     * 多种隐藏软件盘方法的其中一种
+     */
+    private void hideSoftInput(IBinder token) {
+        if (token != null) {
+            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            im.hideSoftInputFromWindow(token,
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
 
     protected abstract int getLayout();
 }

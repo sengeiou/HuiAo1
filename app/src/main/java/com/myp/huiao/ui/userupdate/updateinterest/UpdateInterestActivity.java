@@ -14,6 +14,7 @@ import com.myp.huiao.config.ConditionEnum;
 import com.myp.huiao.entity.ChioceBO;
 import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.mvp.MVPBaseActivity;
+import com.myp.huiao.ui.main.MainActivity;
 import com.myp.huiao.util.LogUtils;
 
 import java.util.List;
@@ -79,8 +80,7 @@ public class UpdateInterestActivity extends MVPBaseActivity<UpdateInterestContra
         MyApplication.user = userBO;
         MyApplication.isLogin = ConditionEnum.LOGIN;
         MyApplication.spUtils.put("uuid", userBO.getUuid());
-
-
+        gotoActivity(MainActivity.class, true);
     }
 
     @Override

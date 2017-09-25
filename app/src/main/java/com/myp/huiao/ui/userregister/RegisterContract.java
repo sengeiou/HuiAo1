@@ -1,9 +1,7 @@
 package com.myp.huiao.ui.userregister;
 
-import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.mvp.BasePresenter;
 import com.myp.huiao.mvp.BaseRequestView;
-import com.myp.huiao.mvp.BaseView;
 
 /**
  * MVPPlugin
@@ -14,6 +12,8 @@ public class RegisterContract {
     interface View extends BaseRequestView {
 
         void getData();
+
+        void getVersionSuress();
 
     }
 

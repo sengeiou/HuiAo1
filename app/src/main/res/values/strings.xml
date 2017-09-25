@@ -4,7 +4,8 @@
     <string name="rv_loading">正在加载...</string>
     <string name="rv_loading_complete">已加载全部内容</string>
 
-    <string name="shouji">请输入您的手机号</string>
+    <string name="zhanghao">请输入你的账号</string>
+    <string name="shouji">请输入手机号</string>
     <string name="mima">请输入密码</string>
     <string name="yanzhengma">请输入验证码</string>
     <string name="yanzheng">验证</string>
@@ -25,6 +26,35 @@
     <string name="nan">男</string>
     <string name="nv">女</string>
     <string name="shenfen">你的身份是？</string>
+    <string name="main1">学习</string>
+    <string name="main2">课程库</string>
+    <string name="main3">发现</string>
+    <string name="main4">我</string>
+    <string name="main2_el">All COURSES</string>
+    <string name="zhuanlankecheng">专栏课程</string>
+    <string name="kechengpaihang">课程排行</string>
+    <string name="title_lizi">乔布斯的魅力演讲</string>
+    <string name="message_lizi">讲述演讲所用技巧的图书，“演讲”已经成为商业沟通的必需</string>
+    <string name="all_class">查看全部课程</string>
+    <string name="price">¥ 99</string>
+    <string name="xueguo">1036人学过</string>
+    <string name="sousuo">搜索感兴趣的内容</string>
+    <string name="remen">热门</string>
+    <string name="nandu">难度</string>
+    <string name="jiage">价格</string>
+    <string name="cancle">取消</string>
+    <string name="select">搜索</string>
+    <string name="xiangqing">详情</string>
+    <string name="pingjia">评价</string>
+    <string name="kehoufenxiang">课后分享</string>
+    <string name="kechengjianjie">课程简介</string>
+    <string name="kechengjiangshi">课程讲师</string>
+    <string name="faxingshang">课程发行商</string>
+    <string name="mulu">授课目录</string>
+    <string name="kechenggaishu">课程概述</string>
+    <string name="shoucang">收藏</string>
+    <string name="zixun">咨询</string>
+    <string name="canjiakecheng">参加课程</string>
 
 
 </resources>

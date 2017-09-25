@@ -1,5 +1,6 @@
 package com.myp.huiao.widget.lgrecycleadapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -8,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.myp.huiao.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by guizhigang on 16/8/8.
@@ -56,5 +58,14 @@ public class LGViewHolder extends RecyclerView.ViewHolder {
     public void setText(int viewId, String text) {
         TextView textView = (TextView) getView(viewId);
         textView.setText(text);
+    }
+
+    public void setImageUrl(Context mContext, int viewId, String url) {
+        ImageView view = (ImageView) getView(viewId);
+        Picasso.with(mContext).load(url)
+                .placeholder(R.drawable.zhanwei1)
+                .error(R.drawable.zhanwei1)
+                .tag(mContext)
+                .into(view);
     }
 }
