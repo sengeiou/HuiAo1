@@ -5,7 +5,10 @@ import com.myp.huiao.entity.BaseResult;
 import com.myp.huiao.entity.ChioceBO;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.entity.CourserClassifyBO;
+import com.myp.huiao.entity.EvaluateBO;
+import com.myp.huiao.entity.TeachersBo;
 import com.myp.huiao.entity.UserBO;
+import com.myp.huiao.mvp.BaseRequestView;
 
 import java.util.List;
 
@@ -141,6 +144,30 @@ public interface HttpService {
     @FormUrlEncoded
     @POST("/huiao/api/course/detail")
     Observable<BaseResult<CourserBO>> courserMessage(@Field("courseId") String courseId);
+
+
+    /**
+     * 获取课程评价列表
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/valuation/list")
+    Observable<BaseResult<List<EvaluateBO>>> courserPingJia(@Field("courseId") String courseId);
+
+
+    /**
+     * 获取教师详情
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/teacher/teachers")
+    Observable<BaseResult<TeachersBo>> teacherMessage(@Field("teacherId") String teacherId);
+
+
+    /**
+     * 获取教师相关教程
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/course/teacher/list")
+    Observable<BaseResult<List<CourserBO>>> teacherCoursers(@Field("teacherId") String teacherId);
 
 
 }

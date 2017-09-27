@@ -131,5 +131,6 @@ dependencies {
     compile 'com.hedgehog.ratingbar:app:1.1.2'
     //完整版引入
     compile 'com.shuyu:GSYVideoPlayer:2.0.8'
+    compile files('libs/universal-image-loader-1.9.2-with-sources.jar')
 }
 

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/header_layout01" />
+
+
+    <ScrollView
+        android:id="@+id/scoll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="30dp"
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp"
+                android:paddingTop="30dp">
+
+
+                <cn.gavinliu.android.lib.shapedimageview.ShapedImageView
+                    android:id="@+id/teather_img"
+                    android:layout_width="77dp"
+                    android:layout_height="77dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/zhanwei1"
+                    app:shape_mode="circle" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp">
+
+                    <TextView
+                        android:id="@+id/teather_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zixun"
+                        android:textColor="@color/D"
+                        android:textSize="@dimen/T10"
+                        android:textStyle="bold" />
+
+
+                    <com.hedgehog.ratingbar.RatingBar xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/teather_ratingbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@+id/teather_name"
+                        hedgehog:clickable="false"
+                        hedgehog:halfstart="false"
+                        hedgehog:starCount="5"
+                        hedgehog:starEmpty="@drawable/xing2"
+                        hedgehog:starFill="@drawable/xing1"
+                        hedgehog:starHalf="@drawable/xing3"
+                        hedgehog:starImageHeight="18dp"
+                        hedgehog:starImagePadding="5dp"
+                        hedgehog:starImageWidth="18dp" />
+
+
+                    <TextView
+                        android:id="@+id/teacher_post"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/teather_name"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/title_lizi"
+                        android:textColor="@color/G"
+                        android:textSize="@dimen/T4" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/teacher_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
+                android:layout_marginStart="14dp"
+                android:lineSpacingExtra="10dp"
+                android:text="@string/message_lizi"
+                android:textColor="@color/B"
+                android:textSize="@dimen/T3" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/jiaoshixiangce"
+                android:textColor="@color/D"
+                android:textSize="@dimen/T1"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/thacher_imglist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:overScrollMode="never" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/xiangguankecheng"
+                android:textColor="@color/D"
+                android:textSize="@dimen/T1"
+                android:textStyle="bold" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/thacher_courser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:overScrollMode="never" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

@@ -20,6 +20,7 @@ import com.myp.huiao.mvp.MVPBaseActivity;
 import com.myp.huiao.ui.courserselect.CourserSelectActivity;
 import com.myp.huiao.util.LogUtils;
 import com.myp.huiao.util.StringUtils;
+import com.myp.huiao.widget.AppBarStateChangeListener;
 import com.myp.huiao.widget.lgrecycleadapter.LGRecycleViewAdapter;
 import com.myp.huiao.widget.lgrecycleadapter.LGViewHolder;
 

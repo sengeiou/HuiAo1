@@ -729,7 +729,7 @@ public class TimeUtils {
         if (span < 1000) {
             return "刚刚";
         } else if (span < TimeConstants.MIN) {
-            return String.format("%d秒前", span / TimeConstants.SEC);
+            return String.format("刚刚", span / TimeConstants.SEC);
         } else if (span < TimeConstants.HOUR) {
             return String.format("%d分钟前", span / TimeConstants.MIN);
         }

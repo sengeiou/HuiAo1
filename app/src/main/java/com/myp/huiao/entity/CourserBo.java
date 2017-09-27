@@ -1,5 +1,8 @@
 package com.myp.huiao.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -186,7 +189,7 @@ public class CourserBO implements Serializable {
         this.teachers = teachers;
     }
 
-    public static class PublishersBo {
+    public static class PublishersBo implements Serializable{
         /**
          * id : 3
          * name : 人民出版社

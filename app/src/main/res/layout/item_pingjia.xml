@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp">
+
+
+            <cn.gavinliu.android.lib.shapedimageview.ShapedImageView
+                android:id="@+id/user_img"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="14dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/zhanwei1"
+                app:shape_mode="circle" />
+
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="14dp"
+                android:layout_toEndOf="@+id/user_img"
+                android:text="@string/zixun"
+                android:textColor="@color/D"
+                android:textSize="@dimen/T3" />
+
+            <com.hedgehog.ratingbar.RatingBar xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/user_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="14dp"
+                hedgehog:clickable="false"
+                hedgehog:halfstart="false"
+                hedgehog:starCount="5"
+                hedgehog:starEmpty="@drawable/xing2"
+                hedgehog:starFill="@drawable/xing1"
+                hedgehog:starHalf="@drawable/xing3"
+                hedgehog:starImageHeight="18dp"
+                hedgehog:starImagePadding="6dp"
+                hedgehog:starImageWidth="18dp" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/user_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginStart="60dp"
+            android:lineSpacingExtra="10dp"
+            android:text="@string/message_lizi"
+            android:textColor="@color/B"
+            android:textSize="@dimen/T3" />
+
+
+        <TextView
+            android:id="@+id/user_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginTop="15dp"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="@string/time"
+            android:textColor="@color/G"
+            android:textSize="@dimen/T7" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginStart="60dp"
+            android:background="#e5e5e5" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

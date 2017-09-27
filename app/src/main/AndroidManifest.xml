@@ -133,6 +133,22 @@
             android:theme="@style/Theme.Mike" />
 
 
+        <!--视频播放全屏页-->
+        <activity
+            android:name=".ui.coursermessage.FullVideoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.Mike" />
+
+
+        <!--教师详情页-->
+        <activity
+            android:name=".ui.teachermsg.TeacherMsgActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Mike" />
+
+
         <!--微信登陆及分享-->
         <activity
             android:name=".wxapi.WXEntryActivity"

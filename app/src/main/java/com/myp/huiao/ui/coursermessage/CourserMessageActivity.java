@@ -1,11 +1,15 @@
 package com.myp.huiao.ui.coursermessage;
 
 
-import android.content.res.Configuration;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,15 +22,15 @@ import com.hedgehog.ratingbar.RatingBar;
 import com.myp.huiao.R;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.mvp.MVPBaseActivity;
+import com.myp.huiao.ui.coursermessage.afterclass.AfterClassFragment;
+import com.myp.huiao.ui.coursermessage.evaluate.EvaluateFragment;
 import com.myp.huiao.ui.coursermessage.message.MessageFragment;
 import com.myp.huiao.util.LogUtils;
 import com.myp.huiao.util.ScreenUtils;
 import com.myp.huiao.util.StringUtils;
 import com.myp.huiao.widget.MyScrollView;
-import com.myp.huiao.widget.SampleListener;
+import com.myp.huiao.widget.video.SampleListener;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
-import com.shuyu.gsyvideoplayer.listener.LockClickListener;
-import com.shuyu.gsyvideoplayer.utils.Debuger;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
@@ -87,16 +91,52 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
     LinearLayout classifyLayout;
     @Bind(R.id.scoll_view)
     MyScrollView scollView;
+    @Bind(R.id.bottom_layout)
+    LinearLayout bottomLayout;
+    @Bind(R.id.message_scoll)
+    TextView messageScoll;
+    @Bind(R.id.remen_bord_scoll)
+    View remenBordScoll;
+    @Bind(R.id.message_layout_scoll)
+    RelativeLayout messageLayoutScoll;
+    @Bind(R.id.pingjia_scoll)
+    TextView pingjiaScoll;
+    @Bind(R.id.pingjia_bord_scoll)
+    View pingjiaBordScoll;
+    @Bind(R.id.pingjia_layout_scoll)
+    RelativeLayout pingjiaLayoutScoll;
+    @Bind(R.id.kehou_scoll)
+    TextView kehouScoll;
+    @Bind(R.id.kehou_bord_scoll)
+    View kehouBordScoll;
+    @Bind(R.id.kehou_layout_scoll)
+    RelativeLayout kehouLayoutScoll;
+    @Bind(R.id.layout_main)
+    RelativeLayout layoutMain;
+    @Bind(R.id.video_img)
+    ImageView videoImg;
+    @Bind(R.id.video_layout)
+    RelativeLayout videoLayout;
+    @Bind(R.id.video_play)
+    ImageView videoPlay;
+    @Bind(R.id.add_courser)
+    TextView addCourser;
+
 
     MessageFragment messageFragment;   //详情
+    EvaluateFragment evaluateFragment;   //课程评价
+    AfterClassFragment afterClassFragment;   //课后分享
     String courserId;
     CourserBO courserBO;
 
 
     private boolean isPlay;
-    private boolean isPause;
-
     private OrientationUtils orientationUtils;
+
+    TextView headerText[];
+    TextView scollText[];
+    View[] headerBord;
+    View[] scollBord;
 
     @Override
     protected int getLayout() {
@@ -108,6 +148,7 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
         super.onCreate(savedInstanceState);
         goBack();
         setTitle("课程详情");
+        setRightButton(R.drawable.fenxiang, this);
 
         courserId = getIntent().getExtras().getString("id", "");
         invition();
@@ -120,28 +161,26 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
      * 初始化界面
      */
     private void invition() {
-        ViewGroup.LayoutParams params = detailPlayer.getLayoutParams();
+        ViewGroup.LayoutParams params = videoLayout.getLayoutParams();
         params.width = ScreenUtils.getScreenWidth();
         params.height = ScreenUtils.getScreenWidth() / 16 * 9;
-        detailPlayer.setLayoutParams(params);
+        videoLayout.setLayoutParams(params);
+        headerText = new TextView[]{message, pingjia, kehou};
+        headerBord = new View[]{remenBord, pingjiaBord, kehouBord};
+        scollText = new TextView[]{messageScoll, pingjiaScoll, kehouScoll};
+        scollBord = new View[]{remenBordScoll, pingjiaBordScoll, kehouBordScoll};
     }
 
     /**
      * 初始化视频设置
      */
     private void inviVideo() {
-        //增加封面
-        ImageView imageView = new ImageView(this);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Glide.with(this).load(courserBO.getVideo().getSnapshotUrl()).into(imageView);
-        detailPlayer.setThumbImageView(imageView);
         //外部辅助的旋转，帮助全屏
         orientationUtils = new OrientationUtils(this, detailPlayer);
         //初始化不打开外部的旋转
         orientationUtils.setEnable(false);
         GSYVideoOptionBuilder gsyVideoOption = new GSYVideoOptionBuilder();
-        gsyVideoOption.setThumbImageView(imageView)
-                .setIsTouchWiget(true)
+        gsyVideoOption.setIsTouchWiget(true)
                 .setRotateViewAuto(false)
                 .setLockLand(false)
                 .setShowFullAnimation(false)
@@ -149,64 +188,24 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
                 .setSeekRatio(1)
                 .setUrl(courserBO.getVideo().getOrigUrl())
                 .setCacheWithPlay(false)
-                .setVideoTitle("测试视频")
+                .setVideoTitle("课程介绍")
                 .setStandardVideoAllCallBack(new SampleListener() {
                     @Override
                     public void onPrepared(String url, Object... objects) {
                         super.onPrepared(url, objects);
-                        //开始播放了才能旋转和全屏
-                        orientationUtils.setEnable(true);
                         isPlay = true;
                     }
-
-                    @Override
-                    public void onEnterFullscreen(String url, Object... objects) {
-                        super.onEnterFullscreen(url, objects);
-                        Debuger.printfError("***** onEnterFullscreen **** " + objects[0]);//title
-                        Debuger.printfError("***** onEnterFullscreen **** " + objects[1]);//当前全屏player
-                    }
-
-                    @Override
-                    public void onAutoComplete(String url, Object... objects) {
-                        super.onAutoComplete(url, objects);
-                    }
-
-                    @Override
-                    public void onClickStartError(String url, Object... objects) {
-                        super.onClickStartError(url, objects);
-                    }
-
-                    @Override
-                    public void onQuitFullscreen(String url, Object... objects) {
-                        super.onQuitFullscreen(url, objects);
-                        Debuger.printfError("***** onQuitFullscreen **** " + objects[0]);//title
-                        Debuger.printfError("***** onQuitFullscreen **** " + objects[1]);//当前非全屏player
-                        if (orientationUtils != null) {
-                            orientationUtils.backToProtVideo();
-                        }
-                    }
                 })
-                .setLockClickListener(new LockClickListener() {
-                    @Override
-                    public void onClick(View view, boolean lock) {
-                        if (orientationUtils != null) {
-                            //配合下方的onConfigurationChanged
-                            orientationUtils.setEnable(!lock);
-                        }
-                    }
-                }).build(detailPlayer);
-
+                .build(detailPlayer);
         detailPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //直接横屏
-                orientationUtils.resolveByClick();
-                //第一个true是否需要隐藏actionbar，第二个true是否需要隐藏statusbar
-                detailPlayer.startWindowFullscreen(CourserMessageActivity.this, true, true);
+                Intent intent = new Intent(CourserMessageActivity.this, FullVideoActivity.class);
+                intent.putExtra("url", courserBO.getVideo().getOrigUrl());
+                intent.putExtra("startTime", detailPlayer.getCurrentPositionWhenPlaying());
+                startActivityForResult(intent, 1);
             }
         });
-
-
     }
 
 
@@ -224,6 +223,14 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
                 }
             }
         });
+        messageLayout.setOnClickListener(this);
+        pingjiaLayout.setOnClickListener(this);
+        kehouLayout.setOnClickListener(this);
+        messageLayoutScoll.setOnClickListener(this);
+        pingjiaLayoutScoll.setOnClickListener(this);
+        kehouLayoutScoll.setOnClickListener(this);
+        videoPlay.setOnClickListener(this);
+        addCourser.setOnClickListener(this);
     }
 
 
@@ -235,11 +242,11 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
         ratingbar.setStar(Float.parseFloat(courserBO.getScore()));
         ratingnum.setText(courserBO.getScore());
         if (StringUtils.isEmpty(courserBO.getCurrentPrice())) {
-            price.setText("¥ " + courserBO.getPrice());
+            price.setText(String.valueOf("¥ " + courserBO.getPrice()));
         } else {
-            price.setText("¥ " + courserBO.getCurrentPrice());
+            price.setText(String.valueOf("¥ " + courserBO.getCurrentPrice()));
         }
-        courserBuy.setText(courserBO.getBuyCount() + "人学过");
+        courserBuy.setText(String.valueOf(courserBO.getBuyCount() + "人学过"));
     }
 
 
@@ -280,9 +287,20 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
     @Override
     public void getCourserBo(CourserBO courserBO) {
         this.courserBO = courserBO;
+        scollView.setVisibility(View.VISIBLE);
         setUIData();
-        inviVideo();
+        if (courserBO.getVideo() == null) {
+            detailPlayer.setVisibility(View.GONE);
+            videoImg.setVisibility(View.VISIBLE);
+            videoPlay.setVisibility(View.GONE);
+            Glide.with(this).load(courserBO.getImageUrl()).into(videoImg);
+        } else {
+            inviVideo();
+            videoImg.setVisibility(View.VISIBLE);
+            Glide.with(this).load(courserBO.getImageUrl()).into(videoImg);
+        }
         messageFragment = MessageFragment.getInstance(courserBO);
+        evaluateFragment = EvaluateFragment.getInstance(courserBO);
         goToFragment(messageFragment);
     }
 
@@ -290,11 +308,101 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.video_play:
-//                videoImg.setVisibility(View.GONE);
-//                videoPlay.setVisibility(View.GONE);
-//                break;
+            case R.id.message_layout:
+            case R.id.message_layout_scoll:
+                classifyUI(0);
+                goToFragment(messageFragment);
+                break;
+            case R.id.pingjia_layout:
+            case R.id.pingjia_layout_scoll:
+                classifyUI(1);
+                goToFragment(evaluateFragment);
+                break;
+            case R.id.kehou_layout:
+            case R.id.kehou_layout_scoll:
+                classifyUI(2);
+                break;
+            case R.id.video_play:   //播放
+                videoImg.setVisibility(View.GONE);
+                videoPlay.setVisibility(View.GONE);
+                detailPlayer.startPlayLogic();
+                break;
+            case R.id.right_img_layout:    //分享
+
+                break;
+            case R.id.add_courser:     //参加课程
+                setShowDialog();
+                break;
         }
+    }
+
+    private void classifyUI(int type) {
+        for (int i = 0; i < headerText.length; i++) {
+            if (i == type) {
+                headerText[i].setTextColor(getResources().getColor(R.color.D));
+                headerText[i].setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                scollText[i].setTextColor(getResources().getColor(R.color.D));
+                scollText[i].setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                headerBord[i].setVisibility(View.VISIBLE);
+                scollBord[i].setVisibility(View.VISIBLE);
+            } else {
+                headerText[i].setTextColor(getResources().getColor(R.color.G));
+                headerText[i].setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                scollText[i].setTextColor(getResources().getColor(R.color.G));
+                scollText[i].setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                headerBord[i].setVisibility(View.GONE);
+                scollBord[i].setVisibility(View.GONE);
+            }
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) {
+            return;
+        }
+        switch (resultCode) {
+            case 1:
+                long startTime = data.getIntExtra("startTime", 0);
+                detailPlayer.setSeekOnStart(startTime);
+                detailPlayer.startPlayLogic();
+                break;
+        }
+    }
+
+
+    AlertDialog dialog;
+
+    /**
+     * 点击参加课程
+     */
+    private void setShowDialog() {
+        LayoutInflater factory = LayoutInflater.from(this);//提示框
+        final View view = factory.inflate(R.layout.dialog_pay_message, null);//这里必须是final的
+        TextView cancle = (TextView) view.findViewById(R.id.off_commit);
+        TextView commit = (TextView) view.findViewById(R.id.commit);
+        TextView title = (TextView) view.findViewById(R.id.title);
+        TextView price = (TextView) view.findViewById(R.id.price);
+        title.setText("确认参加课程《" + courserBO.getName() + "》");
+        price.setText(this.price.getText());
+        dialog = new AlertDialog.Builder(this).create();
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        commit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //事件
+                dialog.dismiss();
+            }
+        });
+        dialog.setView(view);
+        dialog.show();
     }
 
 
@@ -314,35 +422,23 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
     protected void onPause() {
         getCurPlay().onVideoPause();
         super.onPause();
-        isPause = true;
     }
 
     @Override
     protected void onResume() {
         getCurPlay().onVideoResume();
         super.onResume();
-        isPause = false;
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (isPlay) {
             getCurPlay().release();
         }
         //GSYPreViewManager.instance().releaseMediaPlayer();
         if (orientationUtils != null)
             orientationUtils.releaseListener();
-    }
-
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        //如果旋转了就全屏
-        if (isPlay && !isPause) {
-            detailPlayer.onConfigurationChanged(this, newConfig, orientationUtils);
-        }
+        super.onDestroy();
     }
 
 

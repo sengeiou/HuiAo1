@@ -1,6 +1,5 @@
 package com.myp.huiao.entity;
 
-import com.boredream.bdvideoplayer.bean.IVideoInfo;
 
 import java.io.Serializable;
 
@@ -10,7 +9,7 @@ import java.io.Serializable;
  * 视频bean
  */
 
-public class VideoBo implements Serializable, IVideoInfo {
+public class VideoBo implements Serializable {
 
     /**
      * origUrl : http://vodd2uqc5at.vod.126.net/vodd2uqc5at/832b7fe8-e42a-44f6-ba99-014475e735dd.mp4
@@ -36,13 +35,4 @@ public class VideoBo implements Serializable, IVideoInfo {
         this.snapshotUrl = snapshotUrl;
     }
 
-    @Override
-    public String getVideoTitle() {
-        return "";
-    }
-
-    @Override
-    public String getVideoPath() {
-        return origUrl;
-    }
 }

@@ -45,7 +45,7 @@ public class ChaptersBo implements Serializable {
         this.sections = sections;
     }
 
-    public static class SectionBO {
+    public static class SectionBO implements Serializable{
 
 
         /**

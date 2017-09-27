@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <cn.gavinliu.android.lib.shapedimageview.ShapedImageView
+            android:id="@+id/courser_img"
+            android:layout_width="269dp"
+            android:layout_height="134dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/zhanwei1"
+            app:round_radius="6dp"
+            app:shape_mode="round_rect" />
+
+
+        <TextView
+            android:id="@+id/courser_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/title_lizi"
+            android:textColor="@color/D"
+            android:textSize="@dimen/T2"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

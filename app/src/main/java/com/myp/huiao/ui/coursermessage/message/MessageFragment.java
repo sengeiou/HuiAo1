@@ -15,6 +15,8 @@ import com.myp.huiao.R;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.entity.TeachersBo;
 import com.myp.huiao.mvp.MVPBaseFragment;
+import com.myp.huiao.ui.teachermsg.TeacherMsgActivity;
+import com.myp.huiao.widget.CustomExpandableListView;
 import com.myp.huiao.widget.lgrecycleadapter.LGRecycleViewAdapter;
 import com.myp.huiao.widget.lgrecycleadapter.LGViewHolder;
 
@@ -35,7 +37,7 @@ public class MessageFragment extends MVPBaseFragment<MessageContract.View, Messa
     @Bind(R.id.faxingshang_recycle)
     RecyclerView faxingshangRecycle;
     @Bind(R.id.expand_list)
-    ExpandableListView expandList;
+    CustomExpandableListView expandList;
     @Bind(R.id.courser_message)
     TextView courserMessage;
     @Bind(R.id.courser_gaishu)
@@ -109,6 +111,14 @@ public class MessageFragment extends MVPBaseFragment<MessageContract.View, Messa
                 holder.setText(R.id.teather_zhiwei, teachersBo.getProfessional());
             }
         };
+        adapter.setOnItemClickListener(R.id.teacher_layout, new LGRecycleViewAdapter.ItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("id", courserBO.getTeachers().get(position).getId());
+                gotoActivity(TeacherMsgActivity.class, bundle, false);
+            }
+        });
         jiangshiRecycle.setAdapter(adapter);
     }
 
@@ -138,7 +148,21 @@ public class MessageFragment extends MVPBaseFragment<MessageContract.View, Messa
      * 设置章节目录数据
      */
     private void setChapterAdapter() {
+        ExpandListAdapter adapter = new ExpandListAdapter(getActivity(), courserBO.getChapters());
+        expandList.setAdapter(adapter);
+        int groupCount = expandList.getCount();
+        for (int i = 0; i < groupCount; i++) {
+            expandList.expandGroup(i);
+        }
+        expandList.setGroupIndicator(null);
+        expandList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v,
+                                        int groupPosition, long id) {
+                return true;   //默认为false，设为true时，点击事件不会展开Group
+            }
+        });
     }
 
 

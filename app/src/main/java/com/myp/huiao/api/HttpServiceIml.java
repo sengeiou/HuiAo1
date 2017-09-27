@@ -4,6 +4,8 @@ import com.myp.huiao.entity.BannerBO;
 import com.myp.huiao.entity.ChioceBO;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.entity.CourserClassifyBO;
+import com.myp.huiao.entity.EvaluateBO;
+import com.myp.huiao.entity.TeachersBo;
 import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.util.rx.RxResultHelper;
 
@@ -20,7 +22,7 @@ import rx.Observable;
 public class HttpServiceIml {
 
     private static HttpService service;
-    private static final String apiSize = "10";   //分页查询的所有接口默认每页20条
+    private static final String apiSize = "15";   //分页查询的所有接口默认每页20条
 
     /**
      * 获取代理对象
@@ -129,5 +131,26 @@ public class HttpServiceIml {
         return getService().courserMessage(courseId).compose(RxResultHelper.<CourserBO>httpRusult());
     }
 
+
+    /**
+     * 获取课程评价列表
+     */
+    public static Observable<List<EvaluateBO>> courserPingjia(String courseId) {
+        return getService().courserPingJia(courseId).compose(RxResultHelper.<List<EvaluateBO>>httpRusult());
+    }
+
+    /**
+     * 获取教师详情
+     */
+    public static Observable<TeachersBo> teacherMessage(String teacherId) {
+        return getService().teacherMessage(teacherId).compose(RxResultHelper.<TeachersBo>httpRusult());
+    }
+
+    /**
+     * 获取教师相关教程
+     */
+    public static Observable<List<CourserBO>> teacherCoursers(String teacherId) {
+        return getService().teacherCoursers(teacherId).compose(RxResultHelper.<List<CourserBO>>httpRusult());
+    }
 
 }

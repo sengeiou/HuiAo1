@@ -79,12 +79,13 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @Override
     public void onRequestError(String msg) {
+        stopProgress();
         LogUtils.showToast(msg);
     }
 
     @Override
     public void onRequestEnd() {
-
+        stopProgress();
     }
 
 
@@ -101,6 +102,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 phoneStr = editPhone.getText().toString().trim();
                 passwordStr = editPassword.getText().toString().trim();
                 if (isLogin()) {
+                    showProgress("登陆中...");
                     mPresenter.userLogin(phoneStr, MD5.strToMd5Low32(passwordStr), null);
                 }
                 break;
@@ -125,6 +127,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @Override
     public void getUserData(UserBO data) {
+        stopProgress();
         MyApplication.isLogin = ConditionEnum.LOGIN;
         MyApplication.user = data;
         MyApplication.spUtils.put("uuid", data.getUuid());

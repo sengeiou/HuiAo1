@@ -60,5 +60,11 @@
     </style>
 
 
+    <style name="fullDialog">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
 
 </resources>

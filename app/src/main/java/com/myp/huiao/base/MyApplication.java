@@ -11,6 +11,10 @@ import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.util.SPUtils;
 import com.myp.huiao.util.Utils;
 import com.myp.huiao.wxapi.WXUtils;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cn.jpush.android.api.JPushInterface;
@@ -46,7 +50,30 @@ public class MyApplication extends Application {
         JPushInterface.init(this);
         /***注册微信登陆，支付服务*/
         WXUtils.registerWX(this);
+        initImageLoader();
     }
+
+
+    /**
+     * 初始化ImageLoader，这个适用在大图片加载中
+     */
+    public void initImageLoader() {
+        // This configuration tuning is custom. You can tune every option, you
+        // may tune some of them,
+        // or you can create default configuration by
+        // ImageLoaderConfiguration.createDefault(this);
+        // method.
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                getApplicationContext()).threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .writeDebugLogs() // Remove for release app
+                .build();
+        // Initialize ImageLoader with configuration.
+        ImageLoader.getInstance().init(config);
+    }
+
 
     @Override
     protected void attachBaseContext(Context base) {

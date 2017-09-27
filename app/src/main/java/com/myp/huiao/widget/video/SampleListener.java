@@ -1,4 +1,4 @@
-package com.myp.huiao.widget;
+package com.myp.huiao.widget.video;
 
 import com.shuyu.gsyvideoplayer.listener.StandardVideoAllCallBack;
 

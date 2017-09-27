@@ -55,6 +55,11 @@
     <string name="shoucang">收藏</string>
     <string name="zixun">咨询</string>
     <string name="canjiakecheng">参加课程</string>
+    <string name="time">一小时前</string>
+    <string name="jiaoshixiangce">教师相册</string>
+    <string name="xiangguankecheng">相关课程</string>
+    <string name="pay_message">还需支付</string>
+    <string name="pay_zhifu">立即支付</string>
 
 
 </resources>
