@@ -34,7 +34,7 @@ public abstract class BaseWebActivity extends BaseActivity {
         this.mWebView = view;
         initWebViewSettings();
         mWebView.setWebChromeClient(new WebViewChromeClient());
-        mWebView.setWebViewClient(new WebClient());
+        mWebView.setWebViewClient(new WebClient(this));
         mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
     }
 

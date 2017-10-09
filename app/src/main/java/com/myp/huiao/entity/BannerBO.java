@@ -12,14 +12,28 @@ public class BannerBO implements Serializable {
 
 
     /**
-     * imageUrl : http://imagetest.nos-eastchina1.126.net/150580617176409e168abbae424b3a6c452c9ce0b7a60.jpg
-     * redirectUrl : www.huya.com
-     * remark : NIHAO
+     * courseid : null
+     * imageUrl : http://imagetest.nos-eastchina1.126.net/1506417768476245eb6387f37409f359701a2295b56e7.png
+     * playType : null
+     * redirectUrl : www.baidu.com
+     * remark : 测试测试
+     * showName : null
      */
 
+    private String courseid;
     private String imageUrl;
+    private String playType;
     private String redirectUrl;
     private String remark;
+    private String showName;
+
+    public String getCourseid() {
+        return courseid;
+    }
+
+    public void setCourseid(String courseid) {
+        this.courseid = courseid;
+    }
 
     public String getImageUrl() {
         return imageUrl;
@@ -27,6 +41,14 @@ public class BannerBO implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getPlayType() {
+        return playType;
+    }
+
+    public void setPlayType(String playType) {
+        this.playType = playType;
     }
 
     public String getRedirectUrl() {
@@ -43,5 +65,13 @@ public class BannerBO implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getShowName() {
+        return showName;
+    }
+
+    public void setShowName(String showName) {
+        this.showName = showName;
     }
 }

@@ -39,4 +39,30 @@ public class CourserMessagePresenter extends BasePresenterImpl<CourserMessageCon
             }
         });
     }
+
+    @Override
+    public void loadCollectCourser(String courserId, String collectStatus) {
+        HttpServiceIml.collectCourser(courserId, collectStatus).subscribe(new Subscriber<Object>() {
+            @Override
+            public void onCompleted() {
+                if (mView != null) {
+                    mView.onRequestEnd();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (mView != null) {
+                    mView.onRequestError(e.getMessage());
+                }
+            }
+
+            @Override
+            public void onNext(Object s) {
+                if (mView != null) {
+                    mView.getSurcess();
+                }
+            }
+        });
+    }
 }

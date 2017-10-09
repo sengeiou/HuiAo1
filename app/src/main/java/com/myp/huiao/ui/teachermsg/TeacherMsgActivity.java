@@ -15,8 +15,8 @@ import com.myp.huiao.R;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.entity.TeachersBo;
 import com.myp.huiao.mvp.MVPBaseActivity;
+import com.myp.huiao.ui.coursermessage.CourserMessageActivity;
 import com.myp.huiao.util.LogUtils;
-import com.myp.huiao.util.StringUtils;
 import com.myp.huiao.widget.bigimage.ImagPagerUtil;
 import com.myp.huiao.widget.lgrecycleadapter.LGRecycleViewAdapter;
 import com.myp.huiao.widget.lgrecycleadapter.LGViewHolder;
@@ -167,7 +167,7 @@ public class TeacherMsgActivity extends MVPBaseActivity<TeacherMsgContract.View,
      * 设置相关课程
      */
     @Override
-    public void getTeacherCourser(List<CourserBO> courserBOs) {
+    public void getTeacherCourser(final List<CourserBO> courserBOs) {
         LGRecycleViewAdapter<CourserBO> adapter = new LGRecycleViewAdapter<CourserBO>(courserBOs) {
             @Override
             public int getLayoutId(int viewType) {
@@ -180,6 +180,14 @@ public class TeacherMsgActivity extends MVPBaseActivity<TeacherMsgContract.View,
                 holder.setImageUrl(TeacherMsgActivity.this, R.id.courser_img, courserBO.getImageUrl());
             }
         };
+        adapter.setOnItemClickListener(R.id.item_layout, new LGRecycleViewAdapter.ItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("id", courserBOs.get(position).getId());
+                gotoActivity(CourserMessageActivity.class, bundle, false);
+            }
+        });
         thacherCourser.setAdapter(adapter);
     }
 }

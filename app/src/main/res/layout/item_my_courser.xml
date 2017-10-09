@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <cn.gavinliu.android.lib.shapedimageview.ShapedImageView
+        android:id="@+id/courser_img"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_marginTop="15dp"
+        android:scaleType="centerCrop"
+        app:round_radius="6dp"
+        app:shape_mode="round_rect" />
+
+
+    <TextView
+        android:id="@+id/courser_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/title_lizi"
+        android:textColor="@color/L"
+        android:textSize="@dimen/T10"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/courser_seek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/remen"
+        android:textColor="@color/G"
+        android:textSize="@dimen/T4" />
+
+
+</LinearLayout>

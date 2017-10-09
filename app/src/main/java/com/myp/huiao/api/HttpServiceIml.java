@@ -1,10 +1,13 @@
 package com.myp.huiao.api;
 
+import com.myp.huiao.entity.ArticleBO;
 import com.myp.huiao.entity.BannerBO;
 import com.myp.huiao.entity.ChioceBO;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.entity.CourserClassifyBO;
 import com.myp.huiao.entity.EvaluateBO;
+import com.myp.huiao.entity.FeaturedBO;
+import com.myp.huiao.entity.MyCourserBO;
 import com.myp.huiao.entity.TeachersBo;
 import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.util.rx.RxResultHelper;
@@ -22,7 +25,7 @@ import rx.Observable;
 public class HttpServiceIml {
 
     private static HttpService service;
-    private static final String apiSize = "15";   //分页查询的所有接口默认每页20条
+    private static final String apiSize = "20";   //分页查询的所有接口默认每页20条
 
     /**
      * 获取代理对象
@@ -152,5 +155,43 @@ public class HttpServiceIml {
     public static Observable<List<CourserBO>> teacherCoursers(String teacherId) {
         return getService().teacherCoursers(teacherId).compose(RxResultHelper.<List<CourserBO>>httpRusult());
     }
+
+
+    /**
+     * 获取用户课程
+     */
+    public static Observable<List<MyCourserBO>> courserMyList(String courseStatus, String pageNO) {
+        return getService().courserMyList(courseStatus, pageNO, apiSize).compose(RxResultHelper.<List<MyCourserBO>>httpRusult());
+    }
+
+    /**
+     * 获取今日新知
+     */
+    public static Observable<List<ArticleBO>> todayArticle(String articleType, String articlePage) {
+        return getService().todayArticle(articleType, articlePage, apiSize).compose(RxResultHelper.<List<ArticleBO>>httpRusult());
+    }
+
+
+    /**
+     * 收藏课程
+     */
+    public static Observable<Object> collectCourser(String courseId, String collectStatus) {
+        return getService().collectCourser(courseId, collectStatus).compose(RxResultHelper.httpRusult());
+    }
+
+    /**
+     * 精选推荐(发现页面)
+     */
+    public static Observable<List<FeaturedBO>> discoverFeatured() {
+        return getService().discoverFeatured("1", null, "1", "4").compose(RxResultHelper.<List<FeaturedBO>>httpRusult());
+    }
+
+    /**
+     * 分类列表
+     */
+    public static Observable<String> classifyList(String apiPage) {
+        return getService().classifyList(apiPage, apiSize).compose(RxResultHelper.<String>httpRusult());
+    }
+
 
 }

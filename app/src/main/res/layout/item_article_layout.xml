@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="87dp"
+    android:layout_marginTop="20dp"
+    android:orientation="horizontal">
+
+
+    <cn.gavinliu.android.lib.shapedimageview.ShapedImageView
+        android:id="@+id/article_img"
+        android:layout_width="115dp"
+        android:layout_height="87dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/zhanwei2"
+        app:round_radius="6dp"
+        app:shape_mode="round_rect" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="14dp">
+
+
+        <TextView
+            android:id="@+id/article_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="10dp"
+            android:maxLines="2"
+            android:text="@string/message_lizi"
+            android:textColor="@color/L"
+            android:textSize="@dimen/T10"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/article_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:text="@string/zixun"
+            android:textColor="@color/F"
+            android:textSize="@dimen/T4" />
+
+
+        <TextView
+            android:id="@+id/article_xueguo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="5dp"
+            android:text="@string/xueguo"
+            android:textColor="@color/G"
+            android:textSize="@dimen/T7" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

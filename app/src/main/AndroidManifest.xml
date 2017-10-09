@@ -33,7 +33,7 @@
         android:persistent="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup">
+        tools:replace="android:allowBackup,android:persistent,android:supportsRtl">
 
         <activity
             android:name=".ui.userlogin.LoginActivity"
@@ -50,35 +50,35 @@
         <!--首页-->
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--忘记密码-->
         <activity
             android:name=".ui.userforword.ForwordPassActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--忘记密码第二页-->
         <activity
             android:name=".ui.userforword.ForwordPass2Act"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--注册  填写账号密码页-->
         <activity
             android:name=".ui.userregister.RegisterActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--注册  填写性别页-->
         <activity
             android:name=".ui.userupdate.UpdateSexActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
@@ -86,49 +86,49 @@
         <!--注册  选择身份页-->
         <activity
             android:name=".ui.userupdate.updateshenfen.UpdateShenfenActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--注册  选择生日页-->
         <activity
             android:name=".ui.userupdate.UpdateBartherDayActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--注册  选择兴趣页-->
         <activity
             android:name=".ui.userupdate.updateinterest.UpdateInterestActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--课程分类页-->
         <activity
             android:name=".ui.coursersort.CourserSortActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--课程列表页-->
         <activity
             android:name=".ui.courserlist.CourserListActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--课程搜索页-->
         <activity
             android:name=".ui.courserselect.CourserSelectActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
         <!--课程详情页-->
         <activity
             android:name=".ui.coursermessage.CourserMessageActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 
@@ -136,7 +136,7 @@
         <!--视频播放全屏页-->
         <activity
             android:name=".ui.coursermessage.FullVideoActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.Mike" />
 
@@ -144,7 +144,23 @@
         <!--教师详情页-->
         <activity
             android:name=".ui.teachermsg.TeacherMsgActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Mike" />
+
+
+        <!--加载H5的页面页-->
+        <activity
+            android:name=".ui.WebViewActvity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Mike" />
+
+
+        <!--全部今日新知页面页-->
+        <activity
+            android:name=".ui.todayarticle.TodayArticleActivity"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Mike" />
 

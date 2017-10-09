@@ -3,7 +3,9 @@ package com.myp.huiao.util;
 import android.content.Context;
 import android.widget.Toast;
 
+
 import com.myp.huiao.R;
+import com.myp.huiao.entity.ShareBO;
 
 import java.util.HashMap;
 
@@ -34,40 +36,40 @@ public class ShareUtils {
     /**
      * 分享到微信朋友圈
      */
-    public static void shareWXCircle(Context context) {
+    public static void shareWXCircle(Context context, ShareBO shareBO) {
         Platform weixin = ShareSDK.getPlatform(context, WechatMoments.NAME);
         WechatMoments.ShareParams sp = new WechatMoments.ShareParams();
         sp.setShareType(Platform.SHARE_WEBPAGE);
-        sp.setUrl("分享的url");
-        sp.setTitle("分享的标题");
-        sp.setText("分享内容");
-        sp.setImageUrl("分享的图片URL");
+        sp.setUrl(shareBO.getShareurl());
+        sp.setTitle(shareBO.getTitle());
+        sp.setText(shareBO.getContent());
+        sp.setImageUrl(shareBO.getPicture());
         weixin.share(sp);
     }
 
     /**
      * 分享到微信
      */
-    public static void shareWX(Context context) {
+    public static void shareWX(Context context, ShareBO shareBO) {
         Platform weixin = ShareSDK.getPlatform(context, Wechat.NAME);
         Wechat.ShareParams sp = new Wechat.ShareParams();
         sp.setShareType(Platform.SHARE_WEBPAGE);
-        sp.setUrl("分享的url");
-        sp.setTitle("分享的标题");
-        sp.setText("分享内容");
-        sp.setImageUrl("分享的图片URL");
+        sp.setUrl(shareBO.getShareurl());
+        sp.setTitle(shareBO.getTitle());
+        sp.setText(shareBO.getContent());
+        sp.setImageUrl(shareBO.getPicture());
         weixin.share(sp);
     }
 
     /***
      * 分享到QQ
      */
-    public static void shareQQ(Context context) {
+    public static void shareQQ(Context context, ShareBO shareBO) {
         QQ.ShareParams sp = new QQ.ShareParams();
-        sp.setTitle("分享的标题");
-        sp.setTitleUrl("分享的标题链接");
-        sp.setText("分享内容");
-        sp.setImageUrl("分享的图片URL");
+        sp.setTitle(shareBO.getTitle());
+        sp.setTitleUrl(shareBO.getShareurl());
+        sp.setText(shareBO.getContent());
+        sp.setImageUrl(shareBO.getPicture());
         Platform qq = ShareSDK.getPlatform(context, QQ.NAME);
         qq.share(sp);
     }
@@ -75,14 +77,14 @@ public class ShareUtils {
     /**
      * 分享到QQ空间
      */
-    public static void shareQQZone(Context context) {
+    public static void shareQQZone(Context context, ShareBO shareBO) {
         QZone.ShareParams sp = new QZone.ShareParams();
-        sp.setTitle("分享的标题");
-        sp.setTitleUrl("分享的标题链接");
-        sp.setText("分享内容");
-        sp.setImageUrl("分享的图片URL");
+        sp.setTitle(shareBO.getTitle());
+        sp.setTitleUrl(shareBO.getShareurl());
+        sp.setText(shareBO.getContent());
+        sp.setImageUrl(shareBO.getPicture());
         sp.setSite(context.getResources().getString(R.string.app_name));
-        sp.setSiteUrl("程序的下载地址");
+        sp.setSiteUrl("http://dxm.happydoit.com/dx/app/download.html");
         Platform qzone = ShareSDK.getPlatform(context, QZone.NAME);
 //        qzone.setPlatformActionListener(); // 设置分享事件回调
         // 执行图文分享
@@ -93,10 +95,10 @@ public class ShareUtils {
     /***
      * 分享到新浪微博
      */
-    public static void shareWeiBo(final Context context) {
+    public static void shareWeiBo(final Context context, ShareBO shareBO) {
         SinaWeibo.ShareParams sp = new SinaWeibo.ShareParams();
-        sp.setText("分享内容" + "分享链接");
-        sp.setImageUrl("分享的图片URL");
+        sp.setText(shareBO.getContent() + shareBO.getShareurl());
+        sp.setImageUrl(shareBO.getPicture());
         Platform weibo = ShareSDK.getPlatform(context, SinaWeibo.NAME);
         weibo.setPlatformActionListener(new PlatformActionListener() {
             @Override

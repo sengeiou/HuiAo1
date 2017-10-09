@@ -102,7 +102,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
                 phoneStr = editPhone.getText().toString().trim();
                 passwordStr = editPassword.getText().toString().trim();
                 if (isLogin()) {
-                    showProgress("登陆中...");
+                    showNoProgress("登陆中...");
                     mPresenter.userLogin(phoneStr, MD5.strToMd5Low32(passwordStr), null);
                 }
                 break;

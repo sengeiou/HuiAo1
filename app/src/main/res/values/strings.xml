@@ -30,7 +30,9 @@
     <string name="main2">课程库</string>
     <string name="main3">发现</string>
     <string name="main4">我</string>
+    <string name="main1_el">MY COURSE</string>
     <string name="main2_el">All COURSES</string>
+    <string name="main3_el">DISCOVER</string>
     <string name="zhuanlankecheng">专栏课程</string>
     <string name="kechengpaihang">课程排行</string>
     <string name="title_lizi">乔布斯的魅力演讲</string>
@@ -60,6 +62,19 @@
     <string name="xiangguankecheng">相关课程</string>
     <string name="pay_message">还需支付</string>
     <string name="pay_zhifu">立即支付</string>
+    <string name="my_courser">我的课程</string>
+    <string name="jinrixinzhi">今日新知</string>
+    <string name="see_all">查看全部新知</string>
+    <string name="wupingjia">暂时还木有评价啊~ ~</string>
+    <string name="wb">微博</string>
+    <string name="wx">微信好友</string>
+    <string name="pengyouquan">朋友圈</string>
+    <string name="qq">QQ</string>
+    <string name="tuijian">推荐</string>
+    <string name="guanzhu">关注</string>
+    <string name="zuixin">最新</string>
+    <string name="jingxuan_tuijian"># 精选推荐 #</string>
+    <string name="remen_tuijian"># 热门推荐 #</string>
 
 
 </resources>

@@ -103,6 +103,7 @@ dependencies {
     compile 'com.github.paolorotolo:appintro:4.1.0'
     compile 'com.aurelhubert:ahbottomnavigation:1.5.1'
     compile 'cn.gavinliu.android.lib:ShapedImageView:0.4'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     //圆形图片
     compile files('libs/multiwindow-v1.3.2.jar')
     compile files('libs/sdk-v1.0.0.jar')

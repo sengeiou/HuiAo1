@@ -25,6 +25,7 @@ import com.myp.huiao.R;
 import com.myp.huiao.entity.BannerBO;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.mvp.MVPBaseFragment;
+import com.myp.huiao.ui.WebViewActvity;
 import com.myp.huiao.ui.coursermessage.CourserMessageActivity;
 import com.myp.huiao.ui.coursersort.CourserSortActivity;
 import com.myp.huiao.util.LogUtils;
@@ -260,6 +261,15 @@ public class ClassLibraayFragment extends MVPBaseFragment<ClassLibraayContract.V
         banner.setOnPageClickListener(new CustomBanner.OnPageClickListener<BannerBO>() {
             @Override
             public void onPageClick(int position, BannerBO str) {
+                if ("1".equals(str.getPlayType())) {  //1,跳转链接,2,课程详情
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", str.getRedirectUrl());
+                    gotoActivity(WebViewActvity.class, bundle, false);
+                } else if ("2".equals(str.getPlayType())) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", str.getCourseid());
+                    gotoActivity(CourserMessageActivity.class, bundle, false);
+                }
             }
         });
     }

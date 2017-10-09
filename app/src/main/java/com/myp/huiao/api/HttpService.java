@@ -1,14 +1,16 @@
 package com.myp.huiao.api;
 
+import com.myp.huiao.entity.ArticleBO;
 import com.myp.huiao.entity.BannerBO;
 import com.myp.huiao.entity.BaseResult;
 import com.myp.huiao.entity.ChioceBO;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.entity.CourserClassifyBO;
 import com.myp.huiao.entity.EvaluateBO;
+import com.myp.huiao.entity.FeaturedBO;
+import com.myp.huiao.entity.MyCourserBO;
 import com.myp.huiao.entity.TeachersBo;
 import com.myp.huiao.entity.UserBO;
-import com.myp.huiao.mvp.BaseRequestView;
 
 import java.util.List;
 
@@ -170,4 +172,46 @@ public interface HttpService {
     Observable<BaseResult<List<CourserBO>>> teacherCoursers(@Field("teacherId") String teacherId);
 
 
+    /**
+     * 获取我的课程
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/course/mycourse")
+    Observable<BaseResult<List<MyCourserBO>>> courserMyList(@Field("courseStatus") String courseStatus, @Field("apiPage") String apiPage,
+                                                            @Field("apiSize") String apiSize);
+
+
+    /**
+     * 获取今日新知
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/article/articles")
+    Observable<BaseResult<List<ArticleBO>>> todayArticle(@Field("articleType") String articleType, @Field("articlePage") String articlePage,
+                                                         @Field("articleSize") String articleSize);
+
+    /**
+     * 收藏课程
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/course/collect")
+    Observable<BaseResult<Object>> collectCourser(@Field("courseId") String courseId,
+                                                  @Field("collectStatus") String collectStatus);
+
+
+    /**
+     * 精选推荐
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/featured/page")
+    Observable<BaseResult<List<FeaturedBO>>> discoverFeatured(@Field("topicStatus") String topicStatus,
+                                                              @Field("topicCategoryId") String topicCategoryId,
+                                                              @Field("pageNo") String pageNo,
+                                                              @Field("pageSize") String pageSize);
+
+    /**
+     * 获取类别列表
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/topic/categorys")
+    Observable<BaseResult<String>> classifyList(@Field("apiPage") String apiPage, @Field("apiSize") String apiSize);
 }

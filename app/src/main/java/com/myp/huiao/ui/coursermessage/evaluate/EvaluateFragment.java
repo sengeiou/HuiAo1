@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.hedgehog.ratingbar.RatingBar;
 import com.myp.huiao.R;
@@ -34,10 +35,11 @@ public class EvaluateFragment extends MVPBaseFragment<EvaluateContract.View, Eva
 
     @Bind(R.id.list_view)
     MyListView listView;
+    @Bind(R.id.no_layout)
+    LinearLayout noLayout;
 
     CourserBO courserBO;
     List<EvaluateBO> evaluateBOs;
-
 
     public static EvaluateFragment getInstance(CourserBO courserBO) {
         EvaluateFragment myFragment = new EvaluateFragment();
@@ -77,7 +79,14 @@ public class EvaluateFragment extends MVPBaseFragment<EvaluateContract.View, Eva
     @Override
     public void getEvaluateList(List<EvaluateBO> evaluateBOs) {
         this.evaluateBOs = evaluateBOs;
-        setAdapter();
+        if (evaluateBOs == null || evaluateBOs.size() == 0) {
+            noLayout.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+        } else {
+            noLayout.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+            setAdapter();
+        }
     }
 
 

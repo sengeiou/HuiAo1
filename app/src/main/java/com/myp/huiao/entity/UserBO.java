@@ -27,7 +27,7 @@ public class UserBO implements Serializable {
     private String birthday;
     private String education;
     private String gender;
-    private String header;
+    private String headerUrl;
     private String loginDate;
     private String mobile;
     private String nickName;
@@ -65,12 +65,12 @@ public class UserBO implements Serializable {
         this.gender = gender;
     }
 
-    public String getHeader() {
-        return header;
+    public String getHeaderUrl() {
+        return headerUrl;
     }
 
-    public void setHeader(String header) {
-        this.header = header;
+    public void setHeaderUrl(String header) {
+        this.headerUrl = header;
     }
 
     public String getLoginDate() {

@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,6 +31,7 @@ import com.myp.huiao.util.LogUtils;
 import com.myp.huiao.util.ScreenUtils;
 import com.myp.huiao.util.StringUtils;
 import com.myp.huiao.widget.MyScrollView;
+import com.myp.huiao.widget.ShareDialog;
 import com.myp.huiao.widget.video.SampleListener;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
@@ -79,12 +82,8 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
     TextView courserBuy;
     @Bind(R.id.shoucang_img)
     ImageView shoucangImg;
-    @Bind(R.id.shoucang_text)
-    TextView shoucangText;
     @Bind(R.id.zixun_img)
     ImageView zixunImg;
-    @Bind(R.id.zixun_text)
-    TextView zixunText;
     @Bind(R.id.classify_layout_scoll)
     LinearLayout classifyLayoutScoll;
     @Bind(R.id.classify_layout)
@@ -121,18 +120,20 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
     ImageView videoPlay;
     @Bind(R.id.add_courser)
     TextView addCourser;
-
+    @Bind(R.id.shoucang_layout)
+    LinearLayout shoucangLayout;
+    @Bind(R.id.zixun_layout)
+    LinearLayout zixunLayout;
 
     MessageFragment messageFragment;   //详情
     EvaluateFragment evaluateFragment;   //课程评价
     AfterClassFragment afterClassFragment;   //课后分享
     String courserId;
     CourserBO courserBO;
-
+    private boolean isCollect = false;    //课程是否已收藏
 
     private boolean isPlay;
     private OrientationUtils orientationUtils;
-
     TextView headerText[];
     TextView scollText[];
     View[] headerBord;
@@ -154,6 +155,7 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
         invition();
         setListener();
         resolveNormalVideoUI();
+        showProgress("加载中...");
         mPresenter.loadCourserMessage(courserId);
     }
 
@@ -231,6 +233,8 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
         kehouLayoutScoll.setOnClickListener(this);
         videoPlay.setOnClickListener(this);
         addCourser.setOnClickListener(this);
+        shoucangLayout.setOnClickListener(this);
+        zixunLayout.setOnClickListener(this);
     }
 
 
@@ -247,6 +251,13 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
             price.setText(String.valueOf("¥ " + courserBO.getCurrentPrice()));
         }
         courserBuy.setText(String.valueOf(courserBO.getBuyCount() + "人学过"));
+        if ("0".equals(courserBO.getCollectStatus())) {
+            shoucangImg.setImageResource(R.drawable.weishoucang);
+            isCollect = false;
+        } else if ("1".equals(courserBO.getCollectStatus())) {
+            shoucangImg.setImageResource(R.drawable.shoucang);
+            isCollect = true;
+        }
     }
 
 
@@ -286,6 +297,7 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
 
     @Override
     public void getCourserBo(CourserBO courserBO) {
+        stopProgress();
         this.courserBO = courserBO;
         scollView.setVisibility(View.VISIBLE);
         setUIData();
@@ -302,6 +314,24 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
         messageFragment = MessageFragment.getInstance(courserBO);
         evaluateFragment = EvaluateFragment.getInstance(courserBO);
         goToFragment(messageFragment);
+    }
+
+    /**
+     * 点击收藏成功
+     */
+    @Override
+    public void getSurcess() {
+        stopProgress();
+        if (isCollect) {
+            shoucangImg.setImageResource(R.drawable.weishoucang);
+            isCollect = false;
+        } else {
+            shoucangImg.setImageResource(R.drawable.shoucang);
+            isCollect = true;
+        }
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.love_anim);
+        shoucangImg.startAnimation(animation);
+
     }
 
 
@@ -328,10 +358,23 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
                 detailPlayer.startPlayLogic();
                 break;
             case R.id.right_img_layout:    //分享
-
+                ShareDialog dialog = new ShareDialog(this, null);
+                dialog.showAtLocation(bottomLayout, Gravity.BOTTOM, 0, 0);
                 break;
             case R.id.add_courser:     //参加课程
                 setShowDialog();
+                break;
+            case R.id.shoucang_layout:     //收藏
+                if (isCollect) {
+                    mPresenter.loadCollectCourser(courserBO.getId(), "0");
+                } else {
+                    mPresenter.loadCollectCourser(courserBO.getId(), "1");
+                }
+                showProgress("加载中...");
+                break;
+            case R.id.zixun_layout:     //咨询
+                Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.love_anim);
+                zixunImg.startAnimation(animation1);
                 break;
         }
     }
@@ -402,6 +445,7 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
             }
         });
         dialog.setView(view);
+        dialog.getWindow().setWindowAnimations(R.style.dialog_anim);
         dialog.show();
     }
 

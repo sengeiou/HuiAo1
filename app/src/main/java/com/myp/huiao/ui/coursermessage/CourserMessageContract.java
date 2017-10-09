@@ -17,6 +17,11 @@ public class CourserMessageContract {
          */
         void getCourserBo(CourserBO courserBO);
 
+        /**
+         * 收藏接口成功
+         */
+        void getSurcess();
+
     }
 
     interface Presenter extends BasePresenter<View> {
@@ -26,6 +31,11 @@ public class CourserMessageContract {
          * 获取课程详情
          */
         void loadCourserMessage(String courserId);
+
+        /**
+         * 收藏课程
+         */
+        void loadCollectCourser(String courserId, String collectStatus);
 
     }
 }

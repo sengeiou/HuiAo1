@@ -7,6 +7,7 @@
 
 
     <LinearLayout
+        android:id="@+id/item_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -31,7 +32,7 @@
             android:layout_marginBottom="14dp"
             android:layout_marginTop="14dp"
             android:text="@string/title_lizi"
-            android:textColor="@color/D"
+            android:textColor="@color/L"
             android:textSize="@dimen/T2"
             android:textStyle="bold" />
 

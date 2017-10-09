@@ -1,5 +1,6 @@
 package com.myp.huiao.widget.webview;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.view.KeyEvent;
@@ -10,6 +11,8 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.bigkoo.svprogresshud.SVProgressHUD;
+
 /**
  * Created by wuliang on 2017/4/11.
  * <p>
@@ -18,6 +21,16 @@ import android.webkit.WebViewClient;
  */
 
 public class WebClient extends WebViewClient {
+
+
+    private SVProgressHUD svProgressHUD;
+    private Context context;
+
+    public WebClient(Context context) {
+        this.context = context;
+        svProgressHUD = new SVProgressHUD(context);
+    }
+
 
     /**
      * 该方法在加载页面资源时会回调，每一个资源（比如图片）的加载都会调用一次。
@@ -41,6 +54,7 @@ public class WebClient extends WebViewClient {
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
+        svProgressHUD.showWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.BlackCancel);
     }
 
 
@@ -54,6 +68,9 @@ public class WebClient extends WebViewClient {
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
+        if (svProgressHUD.isShowing()) {
+            svProgressHUD.dismiss();
+        }
     }
 
     /***

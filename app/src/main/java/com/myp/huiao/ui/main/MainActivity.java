@@ -11,10 +11,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
+import android.view.View;
 
 import com.myp.huiao.R;
 import com.myp.huiao.base.BaseActivity;
 import com.myp.huiao.ui.main.classlibraay.ClassLibraayFragment;
+import com.myp.huiao.ui.main.discover.DiscoverFragment;
 import com.myp.huiao.ui.main.study.StudyFragment;
 import com.myp.huiao.util.AppManager;
 import com.myp.huiao.util.LogUtils;
@@ -27,7 +29,7 @@ import butterknife.Bind;
  * 主页面
  */
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Bind(R.id.main1)
     BottmTabItem main1;
@@ -40,6 +42,9 @@ public class MainActivity extends BaseActivity {
 
     StudyFragment fragment1;    //学习
     ClassLibraayFragment fragment2;   //课程库
+    DiscoverFragment fragment3;     //发现
+
+    private BottmTabItem[] buttms;
 
     @Override
     protected int getLayout() {
@@ -50,13 +55,53 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        buttms = new BottmTabItem[]{main1, main2, main3, main4};
         fragment1 = new StudyFragment();
         fragment2 = new ClassLibraayFragment();
-
-        goToFragment(fragment2);
-
+        fragment3 = new DiscoverFragment();
+        goToFragment(fragment1);
+        main1.setOnClickListener(this);
+        main2.setOnClickListener(this);
+        main3.setOnClickListener(this);
+        main4.setOnClickListener(this);
         getPermission();
     }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.main1:
+                goToFragment(fragment1);
+                setButtom(0);
+                break;
+            case R.id.main2:
+                goToFragment(fragment2);
+                setButtom(1);
+                break;
+            case R.id.main3:
+                goToFragment(fragment3);
+                setButtom(2);
+                break;
+            case R.id.main4:
+                setButtom(3);
+                break;
+        }
+    }
+
+    /**
+     * 设置底部按钮显示
+     */
+    private void setButtom(int position) {
+        for (int i = 0; i < buttms.length; i++) {
+            if (position == i) {
+                buttms[i].setSelectState(true);
+            } else {
+                buttms[i].setSelectState(false);
+            }
+        }
+    }
+
 
     /**
      * 检查定位权限
@@ -132,5 +177,4 @@ public class MainActivity extends BaseActivity {
         }
         return super.onKeyUp(keyCode, event);
     }
-
 }

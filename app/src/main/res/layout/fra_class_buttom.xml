@@ -40,7 +40,7 @@
         android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="@string/title_lizi"
-        android:textColor="@color/D"
+        android:textColor="@color/L"
         android:textSize="@dimen/T2"
         android:textStyle="bold" />
 

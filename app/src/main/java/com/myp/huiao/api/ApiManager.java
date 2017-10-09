@@ -6,24 +6,20 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.myp.huiao.util.GZipUtils;
-import com.myp.huiao.util.LogUtils;
 import com.myp.huiao.util.MD5;
 import com.myp.huiao.util.StringUtils;
 import com.myp.huiao.util.Utils;
 
-import java.io.EOFException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.nio.charset.UnsupportedCharsetException;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
-import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -31,15 +27,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okhttp3.internal.http.HttpHeaders;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okio.Buffer;
-import okio.BufferedSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
 
 /**
  * 作者 by wuliang 时间 16/11/24.
@@ -141,7 +133,7 @@ public class ApiManager {
             String encodeParm = StringUtils.isEmpty(params) ? postBodyString : params.substring(0, params.length() - 1);
             String sign = MD5.strToMd5Low32(URLEncoder.encode(URLDecoder.decode(encodeParm, "UTF-8"), "UTF-8"));
             RequestBody formBody = new FormBody.Builder()
-                    .add("sign", sign)
+                    .add("sign", sign.replaceAll("\\*", "%2A").replaceAll("\\+", "%20"))
                     .build();
             postBodyString += ((postBodyString.length() > 0) ? "&" : "") + bodyToString(formBody);
             request = requestBuilder
@@ -166,5 +158,4 @@ public class ApiManager {
             return "did not work";
         }
     }
-
 }
