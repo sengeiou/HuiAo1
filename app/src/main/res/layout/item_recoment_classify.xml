@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/item_layout"
+        android:layout_width="87dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/classify_img"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/zhanwei1" />
+
+
+        <TextView
+            android:id="@+id/classify_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:maxLines="2"
+            android:text="@string/title_lizi"
+            android:textColor="@color/F"
+            android:textSize="@dimen/T4" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

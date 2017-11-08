@@ -36,7 +36,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="14dp"
+                    android:layout_marginStart="14dp"
                     android:layout_marginTop="17dp"
                     android:text="@string/main1_el"
                     android:textColor="@color/I"
@@ -122,11 +122,6 @@
                     android:textSize="@dimen/T1" />
 
             </LinearLayout>
-
-
         </android.support.v4.widget.NestedScrollView>
-
-
     </android.support.design.widget.CoordinatorLayout>
-
 </android.support.v4.widget.SwipeRefreshLayout>

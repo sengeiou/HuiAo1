@@ -1,6 +1,7 @@
 package com.myp.huiao.ui.main.discover.recommend;
 
-import com.myp.huiao.entity.FeaturedBO;
+import com.myp.huiao.entity.TopicClaissIfyBO;
+import com.myp.huiao.entity.TopicBO;
 import com.myp.huiao.mvp.BasePresenter;
 import com.myp.huiao.mvp.BaseRequestView;
 
@@ -17,7 +18,17 @@ public class RecommendContract {
         /**
          * 返回精选推荐
          */
-        void getFeatured(List<FeaturedBO> featuredBOs);
+        void getFeatured(List<TopicBO> featuredBOs);
+
+        /**
+         * 返回话题类别列表
+         */
+        void getToppicList(List<TopicClaissIfyBO> topicClaissIfyBOs);
+
+        /**
+         * 返回话题列表
+         */
+        void getToppicUser(List<TopicBO> topicBOs);
 
     }
 
@@ -32,6 +43,11 @@ public class RecommendContract {
          * 获取分类列表
          */
         void loadClassifyList();
+
+        /**
+         * 获取所有话题
+         */
+        void loadTopPicList(boolean isPage);
 
     }
 }

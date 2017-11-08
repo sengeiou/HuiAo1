@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="160dp"
+        android:layout_height="160dp">
+
+        <cn.gavinliu.android.lib.shapedimageview.ShapedImageView
+            android:id="@+id/person_bg01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/zhanwei1"
+            app:round_radius="6dp"
+            app:shape_mode="round_rect" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/person_img01"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/zhanwei1"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="3dp" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

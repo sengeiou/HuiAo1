@@ -3,7 +3,6 @@ package com.myp.huiao.ui.main.discover.recommend;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +13,17 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.myp.huiao.R;
-import com.myp.huiao.entity.FeaturedBO;
+import com.myp.huiao.entity.TopicClaissIfyBO;
+import com.myp.huiao.entity.TopicBO;
 import com.myp.huiao.mvp.MVPBaseFragment;
+import com.myp.huiao.ui.topicclassmessage.TopicMessageActivity;
+import com.myp.huiao.ui.topicmessage.TopicMsgActivity;
 import com.myp.huiao.util.LogUtils;
+import com.myp.huiao.widget.MyGridView;
+import com.myp.huiao.widget.lgrecycleadapter.LGRecycleViewAdapter;
+import com.myp.huiao.widget.lgrecycleadapter.LGViewHolder;
+import com.myp.huiao.widget.superadapter.CommonAdapter;
+import com.myp.huiao.widget.superadapter.ViewHolder;
 
 import java.util.List;
 
@@ -32,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class RecommendFragment extends MVPBaseFragment<RecommendContract.View,
-        RecommendPresenter> implements RecommendContract.View {
+        RecommendPresenter> implements RecommendContract.View, View.OnClickListener {
 
     @Bind(R.id.person_bg01)
     ShapedImageView personBg01;
@@ -52,8 +59,6 @@ public class RecommendFragment extends MVPBaseFragment<RecommendContract.View,
     CircleImageView personImg04;
     @Bind(R.id.recycle)
     RecyclerView recycle;
-    @Bind(R.id.recycle_grid)
-    RecyclerView recycleGrid;
     @Bind(R.id.layout1)
     RelativeLayout layout1;
     @Bind(R.id.layout2)
@@ -64,9 +69,12 @@ public class RecommendFragment extends MVPBaseFragment<RecommendContract.View,
     RelativeLayout layout4;
     @Bind(R.id.layout_line2)
     LinearLayout layoutLine2;
+    @Bind(R.id.grid_view)
+    MyGridView gridView;
+
 
     RelativeLayout layouts[];
-
+    List<TopicBO> topicBOs;    //精选推荐的四个
 
     @Nullable
     @Override
@@ -81,8 +89,11 @@ public class RecommendFragment extends MVPBaseFragment<RecommendContract.View,
         super.onViewCreated(view, savedInstanceState);
 
         initvion();
+        setListener();
         layouts = new RelativeLayout[]{layout1, layout2, layout3, layout4};
         mPresenter.loadDiscoverFeatured();
+        mPresenter.loadClassifyList();
+        mPresenter.loadTopPicList(false);
     }
 
     /**
@@ -92,10 +103,17 @@ public class RecommendFragment extends MVPBaseFragment<RecommendContract.View,
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recycle.setLayoutManager(manager);
-        GridLayoutManager manager1 = new GridLayoutManager(getActivity(), 3);
-        recycleGrid.setLayoutManager(manager1);
-        recycleGrid.setNestedScrollingEnabled(false);
-        recycle.setNestedScrollingEnabled(false);
+    }
+
+
+    /**
+     * 设置监听
+     */
+    private void setListener() {
+        personBg01.setOnClickListener(this);
+        personBg02.setOnClickListener(this);
+        personBg03.setOnClickListener(this);
+        personBg04.setOnClickListener(this);
     }
 
 
@@ -113,7 +131,7 @@ public class RecommendFragment extends MVPBaseFragment<RecommendContract.View,
      * 返回精选推荐
      */
     @Override
-    public void getFeatured(List<FeaturedBO> featuredBOs) {
+    public void getFeatured(List<TopicBO> featuredBOs) {
         switch (featuredBOs.size()) {
             case 1:
                 layoutLine2.setVisibility(View.GONE);
@@ -136,14 +154,15 @@ public class RecommendFragment extends MVPBaseFragment<RecommendContract.View,
 
 
     /**
-     * 设置界面显示变化
+     * 设置精选推荐界面显示变化
      */
-    private void setUIData(List<FeaturedBO> featuredBOs, int size) {
+    private void setUIData(List<TopicBO> featuredBOs, int size) {
+        topicBOs = featuredBOs;
         for (int i = 0; i < layouts.length; i++) {
             if (i < size) {
                 layouts[i].setVisibility(View.VISIBLE);
             } else {
-                layouts[i].setVisibility(View.GONE);
+                layouts[i].setVisibility(View.INVISIBLE);
             }
         }
         for (int i = 0; i < featuredBOs.size(); i++) {
@@ -169,9 +188,76 @@ public class RecommendFragment extends MVPBaseFragment<RecommendContract.View,
     }
 
 
+    /***
+     * 返回横滑的话题类别列表数据
+     */
+    @Override
+    public void getToppicList(final List<TopicClaissIfyBO> topicClaissIfyBOs) {
+        LGRecycleViewAdapter<TopicClaissIfyBO> adapter = new LGRecycleViewAdapter<TopicClaissIfyBO>(topicClaissIfyBOs) {
+            @Override
+            public int getLayoutId(int viewType) {
+                return R.layout.item_recoment_classify;
+            }
+
+            @Override
+            public void convert(LGViewHolder holder, TopicClaissIfyBO topicBO, int position) {
+                holder.setImageUrl(getActivity(), R.id.classify_img, topicBO.getIconUrl());
+                holder.setText(R.id.classify_text, topicBO.getNewName());
+            }
+        };
+        adapter.setOnItemClickListener(R.id.item_layout, new LGRecycleViewAdapter.ItemClickListener() {
+            @Override
+            public void onItemClicked(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("topic", topicClaissIfyBOs.get(position));
+                gotoActivity(TopicMessageActivity.class, bundle, false);
+            }
+        });
+        recycle.setAdapter(adapter);
+    }
+
+    /**
+     * 返回话题列表数据
+     */
+    @Override
+    public void getToppicUser(List<TopicBO> topicBOs) {
+        CommonAdapter<TopicBO> adapter = new CommonAdapter<TopicBO>(getActivity(),
+                R.layout.item_recoment_grid, topicBOs) {
+            @Override
+            protected void convert(ViewHolder viewHolder, TopicBO item, int position) {
+                viewHolder.setImageUrl(R.id.toppic_img, item.getImageUrl());
+            }
+        };
+        gridView.setAdapter(adapter);
+        gridView.setFocusable(false);
+    }
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = 0;
+        switch (v.getId()) {
+            case R.id.person_bg01:
+                i = 0;
+                break;
+            case R.id.person_bg02:
+                i = 1;
+                break;
+            case R.id.person_bg03:
+                i = 2;
+                break;
+            case R.id.person_bg04:
+                i = 3;
+                break;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", topicBOs.get(i).getId());
+        gotoActivity(TopicMsgActivity.class, bundle, false);
     }
 }

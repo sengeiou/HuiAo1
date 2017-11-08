@@ -75,6 +75,14 @@
     <string name="zuixin">最新</string>
     <string name="jingxuan_tuijian"># 精选推荐 #</string>
     <string name="remen_tuijian"># 热门推荐 #</string>
-
+    <string name="jingxuan">精选</string>
+    <string name="all">全部</string>
+    <string name="canyuhuati">参与话题</string>
+    <string name="fabiaopinlun">发表评论...</string>
+    <string name="jiaguanzhu">+ 关注</string>
+    <string name="num">12344515</string>
+    <string name="quanbupinlun">全部评论</string>
+    <string name="huifu">回复</string>
+    <string name="fasong">发送</string>
 
 </resources>

@@ -6,9 +6,11 @@ import com.myp.huiao.entity.ChioceBO;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.entity.CourserClassifyBO;
 import com.myp.huiao.entity.EvaluateBO;
-import com.myp.huiao.entity.FeaturedBO;
 import com.myp.huiao.entity.MyCourserBO;
+import com.myp.huiao.entity.PinLunBO;
 import com.myp.huiao.entity.TeachersBo;
+import com.myp.huiao.entity.TopicBO;
+import com.myp.huiao.entity.TopicClaissIfyBO;
 import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.util.rx.RxResultHelper;
 
@@ -182,16 +184,101 @@ public class HttpServiceIml {
     /**
      * 精选推荐(发现页面)
      */
-    public static Observable<List<FeaturedBO>> discoverFeatured() {
-        return getService().discoverFeatured("1", null, "1", "4").compose(RxResultHelper.<List<FeaturedBO>>httpRusult());
+    public static Observable<List<TopicBO>> discoverFeatured() {
+        return getService().discoverFeatured("1", null, "1", "4").compose(RxResultHelper.<List<TopicBO>>httpRusult());
     }
 
     /**
      * 分类列表
      */
-    public static Observable<String> classifyList(String apiPage) {
-        return getService().classifyList(apiPage, apiSize).compose(RxResultHelper.<String>httpRusult());
+    public static Observable<List<TopicClaissIfyBO>> classifyList(String apiPage) {
+        return getService().classifyList(apiPage, apiSize).compose(RxResultHelper.<List<TopicClaissIfyBO>>httpRusult());
+    }
+
+    /**
+     * 获取所有用户发布的热门话题
+     */
+    public static Observable<List<TopicBO>> HotTopicList(String topicStatus, String pageNo) {
+        return getService().hotPicList(topicStatus, pageNo, apiSize).compose(RxResultHelper.<List<TopicBO>>httpRusult());
     }
 
 
+    /**
+     * 获取类别详情
+     */
+    public static Observable<TopicClaissIfyBO> classifyMessage(String categoryId) {
+        return getService().classifyMessage(categoryId).compose(RxResultHelper.<TopicClaissIfyBO>httpRusult());
+    }
+
+    /**
+     * 获取类别详情下的话题列表
+     */
+    public static Observable<List<TopicBO>> classifyTopicList(String topicStatus, String topicCategoryId,
+                                                              String page) {
+        return getService().discoverFeatured(topicStatus, topicCategoryId, page, apiSize).compose(RxResultHelper.<List<TopicBO>>httpRusult());
+    }
+
+    /**
+     * 获取话题详情
+     */
+    public static Observable<TopicBO> topicMessage(String topicId) {
+        return getService().toppicMessage(topicId).compose(RxResultHelper.<TopicBO>httpRusult());
+    }
+
+    /**
+     * 获取话题一级评论
+     */
+    public static Observable<List<PinLunBO>> topicMessagePinLun(int id, String page) {
+        return getService().topicMessagePinLun(id, page, apiSize).compose(RxResultHelper.<List<PinLunBO>>httpRusult());
+    }
+
+
+    /**
+     * 获取二级评论
+     */
+    public static Observable<List<PinLunBO>> topicPinLunToPinLun(int parentId, String page) {
+        return getService().topicPinLunToPinLun(parentId, page, apiSize).compose(RxResultHelper.<List<PinLunBO>>httpRusult());
+    }
+
+
+    /**
+     * 发布话题评论
+     */
+    public static Observable<String> topicAddPinLun(String topicId, String content) {
+        return getService().topicAddPinLun(topicId, content).compose(RxResultHelper.<String>httpRusult());
+    }
+
+    /**
+     * 发布评论的评论
+     */
+    public static Observable<String> topicPinLunToPinLun(String discussId, String content) {
+        return getService().pinLunToPinLun(discussId, content).compose(RxResultHelper.<String>httpRusult());
+    }
+
+
+    /**
+     * 为话题点赞
+     * <p>
+     * status 点赞状态(0未点赞,1已点)
+     */
+    public static Observable<String> topicDianZan(String topicId, String status) {
+        return getService().topicDianZan(topicId, status).compose(RxResultHelper.<String>httpRusult());
+    }
+
+    /**
+     * 为评论点赞
+     * <p>
+     * status 点赞状态(0未点赞,1已点)
+     */
+    public static Observable<String> PinLunDianZan(String discussId, String status) {
+        return getService().PinLunDianZan(discussId, status).compose(RxResultHelper.<String>httpRusult());
+    }
+
+
+    /**
+     * 关注用户或取消关注用户
+     */
+    public static Observable<String> followUser(String followedUserId, String followStatus) {
+        return getService().followUser(followedUserId, followStatus).compose(RxResultHelper.<String>httpRusult());
+    }
 }

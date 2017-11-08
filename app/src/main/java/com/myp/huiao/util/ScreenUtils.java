@@ -5,6 +5,7 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
@@ -49,6 +50,16 @@ public class ScreenUtils {
         windowManager.getDefaultDisplay().getMetrics(dm);// 给白纸设置宽高
         return dm.heightPixels;
     }
+
+    /**
+     * 获取底部状态栏的高度（单位：px）
+     */
+    public static int getNavigationBarHeight() {
+        Resources resources = Utils.getContext().getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
+    }
+
 
     /**
      * 设置屏幕为横屏

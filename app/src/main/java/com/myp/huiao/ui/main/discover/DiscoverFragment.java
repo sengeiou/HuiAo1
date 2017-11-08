@@ -55,8 +55,6 @@ public class DiscoverFragment extends BaseFragment implements SwipeRefreshLayout
     RelativeLayout zuixinLayout;
     @Bind(R.id.scoll_view)
     NestedScrollView scollView;
-    @Bind(R.id.swipe)
-    SwipeRefreshLayout swipe;
     @Bind(R.id.line)
     View line;
     @Bind(R.id.view_pager)
@@ -77,8 +75,8 @@ public class DiscoverFragment extends BaseFragment implements SwipeRefreshLayout
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        invitionSwipeRefresh(swipe);
-        swipe.setOnRefreshListener(this);
+//        invitionSwipeRefresh(swipe);
+//        swipe.setOnRefreshListener(this);
         setListener();
         fragment1 = new RecommendFragment();
         List<Fragment> fragments = new ArrayList<>();
@@ -97,10 +95,10 @@ public class DiscoverFragment extends BaseFragment implements SwipeRefreshLayout
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset >= 0) {
-                    swipe.setEnabled(true);
+//                    swipe.setEnabled(true);
                     line.setVisibility(View.GONE);
                 } else {
-                    swipe.setEnabled(false);
+//                    swipe.setEnabled(false);
                     line.setVisibility(View.VISIBLE);
                 }
             }

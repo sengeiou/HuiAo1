@@ -165,6 +165,29 @@
             android:theme="@style/Theme.Mike" />
 
 
+        <!--发现类别详情面页-->
+        <activity
+            android:name=".ui.topicclassmessage.TopicMessageActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Mike" />
+
+
+        <!--话题详情面页-->
+        <activity
+            android:name=".ui.topicmessage.TopicMsgActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Mike" />
+
+        <!--话题二级评论面页-->
+        <activity
+            android:name=".ui.topicpinlun.TopicPinLunActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Mike" />
+
+
         <!--微信登陆及分享-->
         <activity
             android:name=".wxapi.WXEntryActivity"

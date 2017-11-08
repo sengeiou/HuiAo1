@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center"
         android:text="@string/jingxuan_tuijian"
         android:textColor="@color/D"
@@ -161,24 +163,32 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp" />
+        android:layout_height="103dp"
+        android:layout_marginTop="24dp"
+        android:overScrollMode="never" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="26dp"
         android:gravity="center"
         android:text="@string/remen_tuijian"
         android:textColor="@color/D"
         android:textSize="@dimen/T2" />
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_grid"
+    <com.myp.huiao.widget.MyGridView
+        android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="30dp"
+        android:horizontalSpacing="14dp"
+        android:numColumns="3"
+        android:overScrollMode="never"
+        android:verticalSpacing="14dp" />
 
 
 </LinearLayout>

@@ -7,9 +7,11 @@ import com.myp.huiao.entity.ChioceBO;
 import com.myp.huiao.entity.CourserBO;
 import com.myp.huiao.entity.CourserClassifyBO;
 import com.myp.huiao.entity.EvaluateBO;
-import com.myp.huiao.entity.FeaturedBO;
 import com.myp.huiao.entity.MyCourserBO;
+import com.myp.huiao.entity.PinLunBO;
 import com.myp.huiao.entity.TeachersBo;
+import com.myp.huiao.entity.TopicBO;
+import com.myp.huiao.entity.TopicClaissIfyBO;
 import com.myp.huiao.entity.UserBO;
 
 import java.util.List;
@@ -27,8 +29,9 @@ import rx.Observable;
 
 public interface HttpService {
 
-    String URL = "http://192.168.1.112:8080";   //测试服
+    //    String URL = "http://192.168.1.112:8080";   //测试服
 //    String URL = "http://192.168.15.100:8080";
+    String URL = "http://192.168.1.57:8080";
 
 
     /**
@@ -203,15 +206,112 @@ public interface HttpService {
      */
     @FormUrlEncoded
     @POST("/huiao/api/featured/page")
-    Observable<BaseResult<List<FeaturedBO>>> discoverFeatured(@Field("topicStatus") String topicStatus,
-                                                              @Field("topicCategoryId") String topicCategoryId,
-                                                              @Field("pageNo") String pageNo,
-                                                              @Field("pageSize") String pageSize);
+    Observable<BaseResult<List<TopicBO>>> discoverFeatured(@Field("topicStatus") String topicStatus,
+                                                           @Field("topicCategoryId") String topicCategoryId,
+                                                           @Field("pageNo") String pageNo,
+                                                           @Field("pageSize") String pageSize);
 
     /**
      * 获取类别列表
      */
     @FormUrlEncoded
     @POST("/huiao/api/topic/categorys")
-    Observable<BaseResult<String>> classifyList(@Field("apiPage") String apiPage, @Field("apiSize") String apiSize);
+    Observable<BaseResult<List<TopicClaissIfyBO>>> classifyList(@Field("apiPage") String apiPage, @Field("apiSize") String apiSize);
+
+
+    /**
+     * 获取所有用户发布的热门话题
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/hotopic/page")
+    Observable<BaseResult<List<TopicBO>>> hotPicList(@Field("topicStatus") String topicStatus,
+                                                     @Field("pageNo") String pageNo,
+                                                     @Field("pgaeSize") String pgaeSize);
+
+
+    /**
+     * 获取类别详情
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/topic/category/detail")
+    Observable<BaseResult<TopicClaissIfyBO>> classifyMessage(@Field("categoryId") String categoryId);
+
+
+    /**
+     * 获取话题详情
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/topic/content")
+    Observable<BaseResult<TopicBO>> toppicMessage(@Field("topicId") String topicId);
+
+
+    /**
+     * 获取话题下的一级评论
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/discuss/list")
+    Observable<BaseResult<List<PinLunBO>>> topicMessagePinLun(@Field("topicId") int topicId,
+                                                              @Field("apiPage") String apiPage, @Field("apiSize") String apiSize);
+
+
+    /**
+     * 获取二级评论
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/discuss/second")
+    Observable<BaseResult<List<PinLunBO>>> topicPinLunToPinLun(@Field("parentId") int parentId,
+                                                               @Field("apiPage") String apiPage, @Field("apiSize") String apiSize);
+
+
+    /**
+     * 发布话题评论
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/discuss/topic")
+    Observable<BaseResult<String>> topicAddPinLun(@Field("topicId") String topicId,
+                                                  @Field("content") String content);
+
+
+    /**
+     * 发布评论的评论
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/discuss/comment")
+    Observable<BaseResult<String>> pinLunToPinLun(@Field("discussId") String discussId,  //评论某一个评论
+                                                  @Field("content") String content);
+
+
+    /**
+     * 为话题点赞
+     * <p>
+     * status 点赞状态(0未点赞,1已点)
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/topic/click")
+    Observable<BaseResult<String>> topicDianZan(@Field("topicId") String topicId,
+                                                @Field("status") String status);
+
+
+    /**
+     * 为某条评论点赞
+     * <p>
+     * status 点赞状态(0未点赞,1已点)
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/discuss/thump")
+    Observable<BaseResult<String>> PinLunDianZan(@Field("discussId") String discussId,
+                                                 @Field("status") String status);
+
+
+    /**
+     * 用户关注某一用户，取消对某一用户的关注
+     * <p>
+     * followStatus 关注状态 1关注 0取消关注
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/appuser/follow")
+    Observable<BaseResult<String>> followUser(@Field("followedUserId") String followedUserId,
+                                              @Field("followStatus") String followStatus);
+
+
 }

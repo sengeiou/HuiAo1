@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/edit_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp"
+        android:layout_weight="1"
+        android:background="@drawable/input_edid_bg"
+        android:gravity="start"
+        android:hint="@string/fabiaopinlun"
+        android:lineSpacingExtra="3dp"
+        android:minLines="3"
+        android:padding="10dp"
+        android:textColor="@color/D"
+        android:textColorHint="@color/G"
+        android:textSize="@dimen/T3" />
+
+
+    <TextView
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="14dp"
+        android:gravity="bottom"
+        android:text="@string/fasong"
+        android:textColor="@color/F"
+        android:textSize="@dimen/T3"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

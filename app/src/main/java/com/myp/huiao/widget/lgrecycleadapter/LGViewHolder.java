@@ -1,6 +1,8 @@
 package com.myp.huiao.widget.lgrecycleadapter;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -68,4 +70,10 @@ public class LGViewHolder extends RecyclerView.ViewHolder {
                 .tag(mContext)
                 .into(view);
     }
+
+    public void setImageResurce(@IdRes int viewId, @DrawableRes int drawable) {
+        ImageView view = (ImageView) getView(viewId);
+        view.setImageResource(drawable);
+    }
+
 }

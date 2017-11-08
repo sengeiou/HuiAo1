@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fafafa"
+        android:paddingEnd="14dp"
+        android:paddingStart="14dp"
+        android:paddingTop="15dp">
+
+
+        <cn.gavinliu.android.lib.shapedimageview.ShapedImageView
+            android:id="@+id/person_img"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/zhanwei1"
+            app:shape_mode="circle" />
+
+
+        <RelativeLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@+id/person_img">
+
+
+            <TextView
+                android:id="@+id/person_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/L"
+                android:textSize="@dimen/T5" />
+
+
+            <TextView
+                android:id="@+id/pinglun_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/person_name"
+                android:layout_marginTop="7dp"
+                android:text="@string/time"
+                android:textColor="@color/G"
+                android:textSize="@dimen/T7" />
+
+
+            <ImageView
+                android:id="@+id/dianzan"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/dianzan1xz" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/pinlun_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/layout1"
+            android:layout_below="@+id/layout1"
+            android:layout_marginTop="15dp"
+            android:lineSpacingExtra="10dp"
+            android:text="@string/message_lizi"
+            android:textColor="@color/L"
+            android:textSize="@dimen/T3" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignStart="@+id/layout1"
+            android:layout_below="@+id/pinlun_message"
+            android:layout_marginTop="20dp"
+            android:background="#e5e5e5" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
