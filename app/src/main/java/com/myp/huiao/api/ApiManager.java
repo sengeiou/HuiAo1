@@ -11,10 +11,8 @@ import com.myp.huiao.util.StringUtils;
 import com.myp.huiao.util.Utils;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
@@ -41,12 +39,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiManager {
 
-    private static final Charset UTF8 = Charset.forName("UTF-8");
-
     private static final String TAG = "ApiManager";
-    private Retrofit mRetrofit;
     private static final int DEFAULT_TIMEOUT = 10;
-    OkHttpClient.Builder builder;
+    private OkHttpClient.Builder builder;
 
     /**
      * 初始化请求体
@@ -85,14 +80,9 @@ public class ApiManager {
 
     /**
      * 获取请求代理
-     *
-     * @param service
-     * @param url
-     * @param <T>
-     * @return
      */
-    public <T> T configRetrofit(Class<T> service, String url) {
-        mRetrofit = new Retrofit.Builder()
+    <T> T configRetrofit(Class<T> service, String url) {
+        Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -102,7 +92,7 @@ public class ApiManager {
     }
 
 
-    Interceptor postInterceptor = new Interceptor() {
+    private Interceptor postInterceptor = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
@@ -112,10 +102,10 @@ public class ApiManager {
             }
             String postBodyString = bodyToString(request.body());
             String params = "";
-            if (postBodyString.indexOf("&") != -1) {
+            if (postBodyString.contains("&")) {
                 String[] post = postBodyString.split("&");
                 SortedMap<String, Object> keyAndValues = new TreeMap<>();
-                if (post != null && post.length != 0) {
+                if (post.length != 0) {
                     for (String param : post) {
                         String key = param.split("=")[0];
                         String value = param.split("=")[1];
@@ -147,10 +137,9 @@ public class ApiManager {
 
     private static String bodyToString(final RequestBody request) {
         try {
-            final RequestBody copy = request;
             final Buffer buffer = new Buffer();
-            if (copy != null)
-                copy.writeTo(buffer);
+            if (request != null)
+                request.writeTo(buffer);
             else
                 return "";
             return buffer.readUtf8();
