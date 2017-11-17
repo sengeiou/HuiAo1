@@ -4,6 +4,7 @@ package com.myp.huiao.ui.topicclassmessage;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -149,10 +150,10 @@ public class TopicMessageActivity extends MVPBaseActivity<TopicMessageContract.V
                     return;
                 }
                 menu1Text.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                menu1Text.setTextColor(getResources().getColor(R.color.D));
+                menu1Text.setTextColor(ContextCompat.getColor(this, R.color.D));
                 menuBorld.setVisibility(View.VISIBLE);
                 menu2Text.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                menu2Text.setTextColor(getResources().getColor(R.color.G));
+                menu2Text.setTextColor(ContextCompat.getColor(this, R.color.G));
                 menu2Borld.setVisibility(View.INVISIBLE);
                 type = 2;
                 mPresenter.loadClassifyList(type + "", topBo.getId(), false);
@@ -162,10 +163,10 @@ public class TopicMessageActivity extends MVPBaseActivity<TopicMessageContract.V
                     return;
                 }
                 menu2Text.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                menu2Text.setTextColor(getResources().getColor(R.color.D));
+                menu2Text.setTextColor(ContextCompat.getColor(this, R.color.D));
                 menu2Borld.setVisibility(View.VISIBLE);
                 menu1Text.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                menu1Text.setTextColor(getResources().getColor(R.color.G));
+                menu1Text.setTextColor(ContextCompat.getColor(this, R.color.G));
                 menuBorld.setVisibility(View.INVISIBLE);
                 type = 1;
                 mPresenter.loadClassifyList(null, topBo.getId(), false);

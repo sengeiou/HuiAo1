@@ -232,7 +232,6 @@
         </LinearLayout>
     </com.myp.huiao.widget.ScrollViewExt>
 
-
     <LinearLayout
         android:id="@id/buttom_layout"
         android:layout_width="match_parent"
@@ -286,4 +285,5 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>

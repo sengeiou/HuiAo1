@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -382,16 +383,16 @@ public class CourserMessageActivity extends MVPBaseActivity<CourserMessageContra
     private void classifyUI(int type) {
         for (int i = 0; i < headerText.length; i++) {
             if (i == type) {
-                headerText[i].setTextColor(getResources().getColor(R.color.D));
+                headerText[i].setTextColor(ContextCompat.getColor(this, R.color.D));
                 headerText[i].setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                scollText[i].setTextColor(getResources().getColor(R.color.D));
+                scollText[i].setTextColor(ContextCompat.getColor(this, R.color.D));
                 scollText[i].setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
                 headerBord[i].setVisibility(View.VISIBLE);
                 scollBord[i].setVisibility(View.VISIBLE);
             } else {
-                headerText[i].setTextColor(getResources().getColor(R.color.G));
+                headerText[i].setTextColor(ContextCompat.getColor(this, R.color.G));
                 headerText[i].setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                scollText[i].setTextColor(getResources().getColor(R.color.G));
+                scollText[i].setTextColor(ContextCompat.getColor(this, R.color.G));
                 scollText[i].setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
                 headerBord[i].setVisibility(View.GONE);
                 scollBord[i].setVisibility(View.GONE);

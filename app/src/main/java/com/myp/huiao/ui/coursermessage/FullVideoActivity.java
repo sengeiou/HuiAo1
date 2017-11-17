@@ -9,8 +9,6 @@ import android.view.WindowManager;
 
 import com.myp.huiao.R;
 import com.myp.huiao.base.BaseActivity;
-import com.myp.huiao.util.AppManager;
-import com.myp.huiao.util.LogUtils;
 import com.myp.huiao.widget.video.SampleListener;
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;

@@ -204,6 +204,21 @@ public class HttpServiceIml {
 
 
     /**
+     * 获取关注的用户发布的话题
+     */
+    public static Observable<List<TopicBO>> followTopic(String apiPage) {
+        return getService().followPicList(apiPage, apiSize).compose(RxResultHelper.<List<TopicBO>>httpRusult());
+    }
+
+    /**
+     * 获取所有话题
+     */
+    public static Observable<List<TopicBO>> topicList(String apiPage) {
+        return getService().topicList("topic", apiPage, apiSize).compose(RxResultHelper.<List<TopicBO>>httpRusult());
+    }
+
+
+    /**
      * 获取类别详情
      */
     public static Observable<TopicClaissIfyBO> classifyMessage(String categoryId) {

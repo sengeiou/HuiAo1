@@ -161,8 +161,6 @@ public class TopicPinLunActivity extends MVPBaseActivity<TopicPinLunContract.Vie
                 CommentDialogFragment commentDialogFragment = new CommentDialogFragment();
                 commentDialogFragment.show(getFragmentManager(), "CommentDialogFragment");
                 break;
-
-
         }
     }
 

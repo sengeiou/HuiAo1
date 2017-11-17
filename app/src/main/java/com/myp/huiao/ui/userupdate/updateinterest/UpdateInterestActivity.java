@@ -3,6 +3,7 @@ package com.myp.huiao.ui.userupdate.updateinterest;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -101,10 +102,10 @@ public class UpdateInterestActivity extends MVPBaseActivity<UpdateInterestContra
         selecChoice = adapter.setSelectCho(chioceBOs.get(position));
         if (selecChoice.size() == 0) {
             nextButton.setEnabled(false);
-            nextButton.setTextColor(getResources().getColor(R.color.E));
+            nextButton.setTextColor(ContextCompat.getColor(this, R.color.E));
         } else {
             nextButton.setEnabled(true);
-            nextButton.setTextColor(getResources().getColor(R.color.F));
+            nextButton.setTextColor(ContextCompat.getColor(this, R.color.F));
         }
     }
 
@@ -114,7 +115,7 @@ public class UpdateInterestActivity extends MVPBaseActivity<UpdateInterestContra
     private String chioce2String() {
         StringBuilder ids = new StringBuilder();
         for (String id : selecChoice.keySet()) {
-            ids.append(id + ",");
+            ids.append(id).append(",");
         }
         return ids.substring(0, ids.length() - 1);
     }

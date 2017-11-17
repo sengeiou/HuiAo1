@@ -3,6 +3,7 @@ package com.myp.huiao.ui.userupdate.updateshenfen;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -100,7 +101,7 @@ public class UpdateShenfenActivity extends MVPBaseActivity<UpdateShenfenContract
         adapter.setChecks(position);
         adapter.notifyDataSetChanged();
         nextButton.setEnabled(true);
-        nextButton.setTextColor(getResources().getColor(R.color.F));
+        nextButton.setTextColor(ContextCompat.getColor(this, R.color.F));
         chioceBO = chioceBOs.get(position);
     }
 

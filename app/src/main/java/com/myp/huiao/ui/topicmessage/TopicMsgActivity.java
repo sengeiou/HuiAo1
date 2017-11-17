@@ -138,7 +138,6 @@ public class TopicMsgActivity extends MVPBaseActivity<TopicMsgContract.View,
 
             @Override
             public void onScrolledToTop() {
-
             }
         });
     }

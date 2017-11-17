@@ -2,20 +2,17 @@ package com.myp.huiao.ui.userupdate;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.myp.huiao.R;
-import com.myp.huiao.api.HttpServiceIml;
 import com.myp.huiao.base.BaseActivity;
-import com.myp.huiao.entity.UserBO;
 import com.myp.huiao.ui.userupdate.updateshenfen.UpdateShenfenActivity;
-import com.myp.huiao.util.LogUtils;
 
 import butterknife.Bind;
-import rx.Subscriber;
 
 /**
  * Created by wuliang on 2017/9/13.
@@ -58,7 +55,7 @@ public class UpdateSexActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        nextButton.setTextColor(getResources().getColor(R.color.F));
+        nextButton.setTextColor(ContextCompat.getColor(this, R.color.F));
         nextButton.setEnabled(true);
         switch (v.getId()) {
             case R.id.nan:    //男

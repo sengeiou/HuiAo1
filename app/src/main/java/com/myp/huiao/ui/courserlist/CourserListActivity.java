@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -201,7 +202,7 @@ public class CourserListActivity extends MVPBaseActivity<CourserListContract.Vie
                 } else {
                     oldPrice.setVisibility(View.VISIBLE);
                     viewHolder.setText(R.id.class_price, "¥ " + item.getCurrentPrice());
-                    oldPrice.setText("¥ " + item.getPrice());
+                    oldPrice.setText(String.valueOf("¥ " + item.getPrice()));
                 }
             }
         };
@@ -273,7 +274,7 @@ public class CourserListActivity extends MVPBaseActivity<CourserListContract.Vie
         for (int i = 0; i < text.length; i++) {
             if (check - 1 == i) {
                 text[i].setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                text[i].setTextColor(getResources().getColor(R.color.D));
+                text[i].setTextColor(ContextCompat.getColor(this, R.color.D));
                 bord[i].setVisibility(View.VISIBLE);
                 if (isUp) {
                     images[i].setImageResource(R.drawable.paixu_xia);
@@ -282,7 +283,7 @@ public class CourserListActivity extends MVPBaseActivity<CourserListContract.Vie
                 }
             } else {
                 text[i].setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-                text[i].setTextColor(getResources().getColor(R.color.G));
+                text[i].setTextColor(ContextCompat.getColor(this, R.color.G));
                 images[i].setImageResource(R.drawable.paixu_none);
                 bord[i].setVisibility(View.GONE);
             }

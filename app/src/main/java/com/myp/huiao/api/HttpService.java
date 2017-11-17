@@ -29,9 +29,9 @@ import rx.Observable;
 
 public interface HttpService {
 
-    //    String URL = "http://192.168.1.112:8080";   //测试服
+    String URL = "http://192.168.1.75:8080";   //测试服
 //    String URL = "http://192.168.15.100:8080";
-    String URL = "http://192.168.1.57:8080";
+//    String URL = "http://192.168.1.63:8088";
 
 
     /**
@@ -227,6 +227,23 @@ public interface HttpService {
     Observable<BaseResult<List<TopicBO>>> hotPicList(@Field("topicStatus") String topicStatus,
                                                      @Field("pageNo") String pageNo,
                                                      @Field("pgaeSize") String pgaeSize);
+
+
+    /**
+     * 获取用户所关注的所有用户发的话题
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/appuser/follow/topic")
+    Observable<BaseResult<List<TopicBO>>> followPicList(@Field("apiPage") String apiPage, @Field("apiSize") String apiSize);
+
+
+    /**
+     * 获取所有话题
+     */
+    @FormUrlEncoded
+    @POST("/huiao/api/topic/list")
+    Observable<BaseResult<List<TopicBO>>> topicList(@Field("top") String top, @Field("apiPage") String apiPage,
+                                                    @Field("apiSize") String apiSize);
 
 
     /**

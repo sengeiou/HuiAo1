@@ -2,6 +2,7 @@ package com.myp.huiao.ui.userupdate;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -77,14 +78,14 @@ public class UpdateBartherDayActivity extends BaseActivity implements View.OnCli
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .setLabel("", "", "", "", "", "")
                 .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
-                .setDividerColor(getResources().getColor(R.color.line_bg))
-                .setTextColorCenter(getResources().getColor(R.color.F))
-                .setTextColorOut(getResources().getColor(R.color.E))
+                .setDividerColor(ContextCompat.getColor(this, R.color.line_bg))
+                .setTextColorCenter(ContextCompat.getColor(this, R.color.F))
+                .setTextColorOut(ContextCompat.getColor(this, R.color.E))
                 .setLineSpacingMultiplier(2.0f)    //行间距
                 .setDate(selectedDate)
-                .setTitleBgColor(getResources().getColor(R.color.white))
+                .setTitleBgColor(ContextCompat.getColor(this, R.color.white))
                 .setRangDate(startDate, endDate)
-                .setBackgroundId(getResources().getColor(R.color.white)) //设置外部遮罩颜色
+                .setBackgroundId(ContextCompat.getColor(this, R.color.white)) //设置外部遮罩颜色
                 .setDecorView(pickerLayout)
                 .build();
         pvTime.setKeyBackCancelable(false);//系统返回键监听屏蔽掉

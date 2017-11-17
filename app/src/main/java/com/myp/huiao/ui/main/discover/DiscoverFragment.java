@@ -1,10 +1,12 @@
 package com.myp.huiao.ui.main.discover;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import com.myp.huiao.R;
 import com.myp.huiao.base.BaseFragment;
 import com.myp.huiao.ui.FragmentPaerAdapter;
+import com.myp.huiao.ui.main.discover.attention.AttentionFragment;
+import com.myp.huiao.ui.main.discover.newest.NewestFragment;
 import com.myp.huiao.ui.main.discover.recommend.RecommendFragment;
 
 import java.util.ArrayList;
@@ -31,7 +35,8 @@ import butterknife.ButterKnife;
  * 发现Fragment
  */
 
-public class DiscoverFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class DiscoverFragment extends BaseFragment implements
+        SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     @Bind(R.id.app_bar)
     AppBarLayout appBar;
@@ -61,6 +66,12 @@ public class DiscoverFragment extends BaseFragment implements SwipeRefreshLayout
     ViewPager viewPager;
 
     RecommendFragment fragment1;
+    AttentionFragment fragment2;
+    NewestFragment fragment3;
+
+
+    TextView[] texts;
+    View[] points;
 
 
     @Nullable
@@ -77,10 +88,25 @@ public class DiscoverFragment extends BaseFragment implements SwipeRefreshLayout
 
 //        invitionSwipeRefresh(swipe);
 //        swipe.setOnRefreshListener(this);
+        invition();
         setListener();
+
+    }
+
+
+    /**
+     * 初始化布局
+     */
+    private void invition() {
+        texts = new TextView[]{tuijian, guanzhu, zuixin};
+        points = new View[]{remenBordScoll, guanzhuBordScoll, zuixinBordScoll};
         fragment1 = new RecommendFragment();
+        fragment2 = new AttentionFragment();
+        fragment3 = new NewestFragment();
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(fragment1);
+        fragments.add(fragment2);
+        fragments.add(fragment3);
         FragmentPaerAdapter adapter = new FragmentPaerAdapter(getActivity().getSupportFragmentManager(),
                 fragments);
         viewPager.setAdapter(adapter);
@@ -111,6 +137,25 @@ public class DiscoverFragment extends BaseFragment implements SwipeRefreshLayout
                 }
             }
         });
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                refreshUI(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        tuijianLayout.setOnClickListener(this);
+        guanzhuLayout.setOnClickListener(this);
+        zuixinLayout.setOnClickListener(this);
     }
 
 
@@ -121,8 +166,47 @@ public class DiscoverFragment extends BaseFragment implements SwipeRefreshLayout
 
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tuijian_layout:
+                refreshUI(0);
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.guanzhu_layout:
+                refreshUI(1);
+                viewPager.setCurrentItem(1);
+                break;
+            case R.id.zuixin_layout:
+                refreshUI(2);
+                viewPager.setCurrentItem(2);
+                break;
+        }
+    }
+
+
+    /**
+     * 根据点击更新UI
+     */
+    private void refreshUI(int index) {
+        for (int i = 0; i < texts.length; i++) {
+            if (index == i) {
+                texts[i].setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                texts[i].setTextColor(ContextCompat.getColor(getActivity(), R.color.D));
+                points[i].setVisibility(View.VISIBLE);
+            } else {
+                texts[i].setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+                texts[i].setTextColor(ContextCompat.getColor(getActivity(), R.color.G));
+                points[i].setVisibility(View.GONE);
+            }
+        }
+    }
+
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
+
 }
